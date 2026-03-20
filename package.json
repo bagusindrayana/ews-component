@@ -1,0 +1,49 @@
+{
+  "name": "ews-nerv-component",
+  "version": "0.0.1",
+  "description": "Stencil Component Starter",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.js",
+  "types": "dist/types/index.d.ts",
+  "collection": "dist/collection/collection-manifest.json",
+  "collection:main": "dist/collection/index.js",
+  "unpkg": "dist/ews-nerv-component/ews-nerv-component.esm.js",
+  "exports": {
+    ".": {
+      "import": "./dist/ews-nerv-component/ews-nerv-component.esm.js",
+      "require": "./dist/ews-nerv-component/ews-nerv-component.cjs.js"
+    },
+    "./my-component": {
+      "import": "./dist/components/my-component.js",
+      "types": "./dist/components/my-component.d.ts"
+    },
+    "./loader": {
+      "import": "./loader/index.js",
+      "require": "./loader/index.cjs",
+      "types": "./loader/index.d.ts"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stenciljs/component-starter.git"
+  },
+  "files": [
+    "dist/",
+    "loader/"
+  ],
+  "scripts": {
+    "build": "stencil build",
+    "start": "stencil build --dev --watch --serve",
+    "test": "stencil-test",
+    "test:watch": "stencil-test --watch",
+    "generate": "stencil generate"
+  },
+  "devDependencies": {
+    "@stencil/core": "^4.27.1",
+    "@stencil/vitest": "^1.8.3",
+    "@types/node": "^22.13.5",
+    "@vitest/browser-playwright": "^4.0.0",
+    "vitest": "^4.0.0"
+  },
+  "license": "MIT"
+}
