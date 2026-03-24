@@ -1,0 +1,136 @@
+.ews-card {
+    --ews-card-color: var(--orange, #fa0);
+    --ews-card-radius: var(--gutter-size, 8px);
+    --ews-card-border-width: 3px;
+    background-color: black;
+    transition: 0.3s;
+
+    border-radius: var(--ews-card-radius);
+    border-style: solid;
+    border-width: var(--ews-card-border-width);
+    border-color: var(--ews-card-color);
+}
+
+.ews-card.ews-card-red {
+    --ews-card-color: var(--red, #f23);
+}
+
+.ews-card-header {
+    padding: 6px;
+    color: var(--ews-card-color);
+    position: relative;
+    border-radius: 10px 10px 0px 0px;
+    border-bottom: var(--ews-card-border-width) solid var(--ews-card-color);
+}
+
+.ews-card-header .ews-card-text {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ews-card-header button {
+    cursor: pointer;
+}
+
+.ews-card-footer {
+    padding: 6px;
+    color: var(--ews-card-color);
+    position: relative;
+    border-radius: 0px 0px 10px 10px;
+    border-top: var(--ews-card-border-width) solid var(--ews-card-color);
+}
+
+.ews-card-footer .ews-card-text {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ews-card-content {
+    color: var(--ews-card-color);
+}
+
+
+.ews-card-content::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    background-color: rgb(61, 61, 61);
+}
+
+.ews-card-content::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+    background-color: rgb(61, 61, 61);
+}
+
+.ews-card-content::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: var(--red);
+}
+
+.ews-card-content tbody {
+    font-size: 10px !important;
+}
+
+.ews-card-float {
+    transition: all 0.3s ease-in-out;
+}
+
+.ews-card-float .ews-card-content {
+    display: block;
+    max-height: 45vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.ews-card-close-button {
+    font-size: 24px;
+    color: #e60003;
+    padding: 2px 4px;
+    background-color: black !important;
+    right: 10px !important;
+    top: 10px !important;
+}
+
+@media (max-width: 768px) {
+
+    .ews-card {
+        --ews-card-border-width: 1px;
+    }
+
+    .ews-card-float .ews-card-content {
+        display: none;
+        padding: 0px;
+    }
+
+    .ews-card-float.open .ews-card-content {
+        display: block;
+        padding: 6px;
+    }
+
+    .ews-card-float {
+        margin: auto;
+        right: 0.25rem;
+        left: 0.25rem;
+    }
+
+    .ews-card-float .ews-card-header {
+        border-bottom: unset;
+    }
+
+    .ews-card-header {
+        cursor: pointer;
+    }
+}

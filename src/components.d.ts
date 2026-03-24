@@ -6,6 +6,18 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
+    interface EwsCard {
+        "color"?: string;
+        /**
+          * Additional CSS classes to apply to the card wrapper
+          * @default ''
+         */
+        "customClass": string;
+        /**
+          * Inline style for border color
+         */
+        "customStyle"?: string;
+    }
     interface MyComponent {
         /**
           * The first name
@@ -21,7 +33,28 @@ export namespace Components {
         "middle": string;
     }
 }
+export interface EwsCardCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLEwsCardElement;
+}
 declare global {
+    interface HTMLEwsCardElementEventMap {
+        "toggle": void;
+    }
+    interface HTMLEwsCardElement extends Components.EwsCard, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLEwsCardElementEventMap>(type: K, listener: (this: HTMLEwsCardElement, ev: EwsCardCustomEvent<HTMLEwsCardElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLEwsCardElementEventMap>(type: K, listener: (this: HTMLEwsCardElement, ev: EwsCardCustomEvent<HTMLEwsCardElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLEwsCardElement: {
+        prototype: HTMLEwsCardElement;
+        new (): HTMLEwsCardElement;
+    };
     interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
     }
     var HTMLMyComponentElement: {
@@ -29,10 +62,27 @@ declare global {
         new (): HTMLMyComponentElement;
     };
     interface HTMLElementTagNameMap {
+        "ews-card": HTMLEwsCardElement;
         "my-component": HTMLMyComponentElement;
     }
 }
 declare namespace LocalJSX {
+    interface EwsCard {
+        "color"?: string;
+        /**
+          * Additional CSS classes to apply to the card wrapper
+          * @default ''
+         */
+        "customClass"?: string;
+        /**
+          * Inline style for border color
+         */
+        "customStyle"?: string;
+        /**
+          * Emitted when the card toggles open/close state
+         */
+        "onToggle"?: (event: EwsCardCustomEvent<void>) => void;
+    }
     interface MyComponent {
         /**
           * The first name
@@ -48,6 +98,11 @@ declare namespace LocalJSX {
         "middle"?: string;
     }
 
+    interface EwsCardAttributes {
+        "customClass": string;
+        "color": string;
+        "customStyle": string;
+    }
     interface MyComponentAttributes {
         "first": string;
         "middle": string;
@@ -55,6 +110,7 @@ declare namespace LocalJSX {
     }
 
     interface IntrinsicElements {
+        "ews-card": Omit<EwsCard, keyof EwsCardAttributes> & { [K in keyof EwsCard & keyof EwsCardAttributes]?: EwsCard[K] } & { [K in keyof EwsCard & keyof EwsCardAttributes as `attr:${K}`]?: EwsCardAttributes[K] } & { [K in keyof EwsCard & keyof EwsCardAttributes as `prop:${K}`]?: EwsCard[K] };
         "my-component": Omit<MyComponent, keyof MyComponentAttributes> & { [K in keyof MyComponent & keyof MyComponentAttributes]?: MyComponent[K] } & { [K in keyof MyComponent & keyof MyComponentAttributes as `attr:${K}`]?: MyComponentAttributes[K] } & { [K in keyof MyComponent & keyof MyComponentAttributes as `prop:${K}`]?: MyComponent[K] };
     }
 }
@@ -62,6 +118,7 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "ews-card": LocalJSX.IntrinsicElements["ews-card"] & JSXBase.HTMLAttributes<HTMLEwsCardElement>;
             "my-component": LocalJSX.IntrinsicElements["my-component"] & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
         }
     }
