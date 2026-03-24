@@ -13,9 +13,13 @@
       "import": "./dist/ews-component/ews-component.esm.js",
       "require": "./dist/ews-component/ews-component.cjs.js"
     },
-    "./my-component": {
-      "import": "./dist/components/my-component.js",
-      "types": "./dist/components/my-component.d.ts"
+    "./components": {
+      "import": "./dist/components/index.js",
+      "types": "./dist/components/index.d.ts"
+    },
+    "./components/*": {
+      "import": "./dist/components/*.js",
+      "types": "./dist/components/*.d.ts"
     },
     "./loader": {
       "import": "./loader/index.js",

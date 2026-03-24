@@ -29,7 +29,7 @@ export class EwsCard {
    */
   @State() open: boolean = false;
 
-  @State() hasTitle: boolean = false;
+  @State() hasHeader: boolean = false;
   @State() hasFooter: boolean = false;
 
   /**
@@ -51,11 +51,11 @@ export class EwsCard {
 
   private checkSlots() {
     if (!this.el) return;
-    const titleSlot = !!this.el.querySelector('[slot="title"]');
+    const headerSlot = !!this.el.querySelector('[slot="header"]');
     const footerSlot = !!this.el.querySelector('[slot="footer"]');
 
-    if (this.hasTitle !== titleSlot) {
-      this.hasTitle = titleSlot;
+    if (this.hasHeader !== headerSlot) {
+      this.hasHeader = headerSlot;
     }
     if (this.hasFooter !== footerSlot) {
       this.hasFooter = footerSlot;
@@ -73,12 +73,12 @@ export class EwsCard {
         class={`ews-card ${this.customClass} ews-card-${this.color} ${this.open ? 'open' : ''}`.trim()}
         style={this.customStyle ? { style: this.customStyle } : {}}
       >
-        {this.hasTitle && (
+        {this.hasHeader && (
           <div
             class="ews-card-header"
             onClick={this.handleToggle}
           >
-            <slot name="title" />
+            <slot name="header" />
           </div>
         )}
 

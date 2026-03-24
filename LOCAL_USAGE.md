@@ -23,9 +23,7 @@ npm link ews-component
 
 ---
 
-## 3. Cara Penggunaan di Proyek Tujuan
-
-### Registrasi Komponen (Svelte/Vite/JS)
+### Framework: Svelte / Vite / Vanilla JS
 Tambahkan loader di file entri utama (seperti `src/routes/+layout.svelte` atau `main.ts`):
 
 ```javascript
@@ -36,16 +34,84 @@ if (typeof window !== 'undefined') {
 }
 ```
 
-### Contoh Penggunaan HTML
-```html
-<!-- Kartu -->
-<ews-card>
-  <div slot="header">Judul Kartu</div>
-  <p>Konten kartu di sini.</p>
-</ews-card>
+### Framework: React
+Untuk React, panggil `defineCustomElements()` di file entri utama (`index.js` atau `App.js`):
 
-<!-- Hexagon Shape -->
-<ews-hex-shape color="#3498db" size="120"></ews-hex-shape>
+```tsx
+import { useEffect } from 'react';
+import { defineCustomElements } from 'ews-component/loader';
+
+function App() {
+  useEffect(() => {
+    defineCustomElements();
+  }, []);
+
+  return (
+    <div>
+      <ews-card>
+        <div slot="header">React Card</div>
+        <p>Konten di React</p>
+      </ews-card>
+    </div>
+  );
+}
+```
+
+### Framework: Vue (Vite)
+Untuk Vue 3 dengan Vite, cara paling stabil adalah mengimport komponen secara langsung (menghindari error "Constructor not found"):
+
+1. Konfigurasi `vite.config.ts`:
+```typescript
+// vite.config.ts
+export default defineConfig({
+  plugins: [
+    vue({
+      template: {
+        compilerOptions: {
+          isCustomElement: (tag) => tag.startsWith('ews-')
+        }
+      }
+    })
+  ]
+})
+```
+
+2. Register komponen di `main.ts` atau di component yang membutuhkan:
+```typescript
+// Mengimport dan register secara eksplisit (lebih stabil untuk development/npm link)
+import 'ews-component/components/ews-card';
+import 'ews-component/components/ews-hex-shape';
+```
+
+Atau jika ingin loader otomatis (namun kadang terkendala `npm link`):
+```typescript
+import { defineCustomElements } from 'ews-component/loader';
+defineCustomElements();
+```
+
+### Plain HTML (Tanpa Bundler)
+Jika ingin menggunakan langsung di file HTML tanpa build tool:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>EWS Component Demo</title>
+  <!-- Load component bundle (sesuaikan path ke node_modules jika lokal) -->
+  <script type="module" src="./node_modules/ews-component/dist/ews-component/ews-component.esm.js"></script>
+</head>
+<body>
+
+  <ews-card>
+    <div slot="header">Vanilla HTML</div>
+    <p>Berjalan langsung di browser.</p>
+  </ews-card>
+
+  <ews-hex-shape color="#3498db" size="120"></ews-hex-shape>
+
+</body>
+</html>
 ```
 
 ## Alternatif: Install Langsung

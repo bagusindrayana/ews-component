@@ -16,7 +16,7 @@
 }
 
 .ews-card-header {
-    padding: 6px;
+    /* padding: 6px; */
     color: var(--ews-card-color);
     position: relative;
     border-radius: 10px 10px 0px 0px;
@@ -39,7 +39,7 @@
 }
 
 .ews-card-footer {
-    padding: 6px;
+    /* padding: 6px; */
     color: var(--ews-card-color);
     position: relative;
     border-radius: 0px 0px 10px 10px;
