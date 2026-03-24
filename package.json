@@ -1,5 +1,5 @@
 {
-  "name": "ews-nerv-component",
+  "name": "ews-component",
   "version": "0.0.1",
   "description": "Stencil Component Starter",
   "main": "dist/index.cjs.js",
@@ -7,11 +7,11 @@
   "types": "dist/types/index.d.ts",
   "collection": "dist/collection/collection-manifest.json",
   "collection:main": "dist/collection/index.js",
-  "unpkg": "dist/ews-nerv-component/ews-nerv-component.esm.js",
+  "unpkg": "dist/ews-component/ews-component.esm.js",
   "exports": {
     ".": {
-      "import": "./dist/ews-nerv-component/ews-nerv-component.esm.js",
-      "require": "./dist/ews-nerv-component/ews-nerv-component.cjs.js"
+      "import": "./dist/ews-component/ews-component.esm.js",
+      "require": "./dist/ews-component/ews-component.cjs.js"
     },
     "./my-component": {
       "import": "./dist/components/my-component.js",

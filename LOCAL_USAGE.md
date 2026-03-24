@@ -3,7 +3,7 @@
 Ikuti langkah-langkah berikut untuk menggunakan `ews-card` dan `ews-hex-shape` di proyek lokal lain.
 
 ## 1. Build Library
-Pastikan library sudah di-build di direktori ini (`ews-nerv-component`):
+Pastikan library sudah di-build di direktori ini (`ews-component`):
 ```bash
 npm run build
 ```
@@ -11,14 +11,14 @@ npm run build
 ## 2. Link Library (Development)
 Gunakan `npm link` agar perubahan di library ini langsung terlihat di proyek tujuan.
 
-**Di direktori ini (`ews-nerv-component`):**
+**Di direktori ini (`ews-component`):**
 ```bash
 npm link
 ```
 
 **Di direktori proyek tujuan (misal: `ews-concept-new`):**
 ```bash
-npm link ews-nerv-component
+npm link ews-component
 ```
 
 ---
@@ -29,7 +29,7 @@ npm link ews-nerv-component
 Tambahkan loader di file entri utama (seperti `src/routes/+layout.svelte` atau `main.ts`):
 
 ```javascript
-import { defineCustomElements } from 'ews-nerv-component/loader';
+import { defineCustomElements } from 'ews-component/loader';
 
 if (typeof window !== 'undefined') {
   defineCustomElements();
@@ -51,5 +51,5 @@ if (typeof window !== 'undefined') {
 ## Alternatif: Install Langsung
 Jika tidak ingin menggunakan `link`, Anda bisa menginstall langsung dari path folder:
 ```bash
-npm install ../path/to/ews-nerv-component
+npm install ../path/to/ews-component
 ```
