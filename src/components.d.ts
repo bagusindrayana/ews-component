@@ -7,6 +7,9 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface EwsCard {
+        /**
+          * Custom color for border and content (red or orange)
+         */
         "color"?: string;
         /**
           * Additional CSS classes to apply to the card wrapper
@@ -14,9 +17,36 @@ export namespace Components {
          */
         "customClass": string;
         /**
-          * Inline style for border color
+          * Inline style
          */
         "customStyle"?: string;
+    }
+    interface EwsHexShape {
+        /**
+          * Whether to clip content within the hex shape.
+          * @default false
+         */
+        "clipContent": boolean;
+        /**
+          * The color variant of the hex shape.
+          * @default ''
+         */
+        "color": string;
+        /**
+          * Additional CSS classes for the component.
+          * @default ''
+         */
+        "customClass": string;
+        /**
+          * Whether the hex shape has a flat top.
+          * @default true
+         */
+        "flatTop": boolean;
+        /**
+          * The padding inside the hex shape for content.
+          * @default 10
+         */
+        "paddingContent": number;
     }
     interface MyComponent {
         /**
@@ -55,6 +85,12 @@ declare global {
         prototype: HTMLEwsCardElement;
         new (): HTMLEwsCardElement;
     };
+    interface HTMLEwsHexShapeElement extends Components.EwsHexShape, HTMLStencilElement {
+    }
+    var HTMLEwsHexShapeElement: {
+        prototype: HTMLEwsHexShapeElement;
+        new (): HTMLEwsHexShapeElement;
+    };
     interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
     }
     var HTMLMyComponentElement: {
@@ -63,11 +99,15 @@ declare global {
     };
     interface HTMLElementTagNameMap {
         "ews-card": HTMLEwsCardElement;
+        "ews-hex-shape": HTMLEwsHexShapeElement;
         "my-component": HTMLMyComponentElement;
     }
 }
 declare namespace LocalJSX {
     interface EwsCard {
+        /**
+          * Custom color for border and content (red or orange)
+         */
         "color"?: string;
         /**
           * Additional CSS classes to apply to the card wrapper
@@ -75,13 +115,40 @@ declare namespace LocalJSX {
          */
         "customClass"?: string;
         /**
-          * Inline style for border color
+          * Inline style
          */
         "customStyle"?: string;
         /**
           * Emitted when the card toggles open/close state
          */
         "onToggle"?: (event: EwsCardCustomEvent<void>) => void;
+    }
+    interface EwsHexShape {
+        /**
+          * Whether to clip content within the hex shape.
+          * @default false
+         */
+        "clipContent"?: boolean;
+        /**
+          * The color variant of the hex shape.
+          * @default ''
+         */
+        "color"?: string;
+        /**
+          * Additional CSS classes for the component.
+          * @default ''
+         */
+        "customClass"?: string;
+        /**
+          * Whether the hex shape has a flat top.
+          * @default true
+         */
+        "flatTop"?: boolean;
+        /**
+          * The padding inside the hex shape for content.
+          * @default 10
+         */
+        "paddingContent"?: number;
     }
     interface MyComponent {
         /**
@@ -103,6 +170,13 @@ declare namespace LocalJSX {
         "color": string;
         "customStyle": string;
     }
+    interface EwsHexShapeAttributes {
+        "customClass": string;
+        "color": string;
+        "flatTop": boolean;
+        "clipContent": boolean;
+        "paddingContent": number;
+    }
     interface MyComponentAttributes {
         "first": string;
         "middle": string;
@@ -111,6 +185,7 @@ declare namespace LocalJSX {
 
     interface IntrinsicElements {
         "ews-card": Omit<EwsCard, keyof EwsCardAttributes> & { [K in keyof EwsCard & keyof EwsCardAttributes]?: EwsCard[K] } & { [K in keyof EwsCard & keyof EwsCardAttributes as `attr:${K}`]?: EwsCardAttributes[K] } & { [K in keyof EwsCard & keyof EwsCardAttributes as `prop:${K}`]?: EwsCard[K] };
+        "ews-hex-shape": Omit<EwsHexShape, keyof EwsHexShapeAttributes> & { [K in keyof EwsHexShape & keyof EwsHexShapeAttributes]?: EwsHexShape[K] } & { [K in keyof EwsHexShape & keyof EwsHexShapeAttributes as `attr:${K}`]?: EwsHexShapeAttributes[K] } & { [K in keyof EwsHexShape & keyof EwsHexShapeAttributes as `prop:${K}`]?: EwsHexShape[K] };
         "my-component": Omit<MyComponent, keyof MyComponentAttributes> & { [K in keyof MyComponent & keyof MyComponentAttributes]?: MyComponent[K] } & { [K in keyof MyComponent & keyof MyComponentAttributes as `attr:${K}`]?: MyComponentAttributes[K] } & { [K in keyof MyComponent & keyof MyComponentAttributes as `prop:${K}`]?: MyComponent[K] };
     }
 }
@@ -119,6 +194,7 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "ews-card": LocalJSX.IntrinsicElements["ews-card"] & JSXBase.HTMLAttributes<HTMLEwsCardElement>;
+            "ews-hex-shape": LocalJSX.IntrinsicElements["ews-hex-shape"] & JSXBase.HTMLAttributes<HTMLEwsHexShapeElement>;
             "my-component": LocalJSX.IntrinsicElements["my-component"] & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
         }
     }

@@ -9,7 +9,7 @@
 
 | Property      | Attribute      | Description                                         | Type     | Default     |
 | ------------- | -------------- | --------------------------------------------------- | -------- | ----------- |
-| `color`       | `color`        |                                                     | `string` | `undefined` |
+| `color`       | `color`        | Custom color for border and content (red or orange) | `string` | `undefined` |
 | `customClass` | `custom-class` | Additional CSS classes to apply to the card wrapper | `string` | `''`        |
 | `customStyle` | `custom-style` | Inline style                                        | `string` | `undefined` |
 
