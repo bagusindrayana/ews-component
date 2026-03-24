@@ -48,6 +48,32 @@ export namespace Components {
          */
         "paddingContent": number;
     }
+    interface EwsStripeBar {
+        /**
+          * @default ''
+         */
+        "color": string;
+        /**
+          * @default 10
+         */
+        "duration": number;
+        /**
+          * @default false
+         */
+        "loop": boolean;
+        /**
+          * @default ''
+         */
+        "orientation": string;
+        /**
+          * @default false
+         */
+        "reverse": boolean;
+        /**
+          * @default '30px'
+         */
+        "size": string;
+    }
     interface MyComponent {
         /**
           * The first name
@@ -91,6 +117,12 @@ declare global {
         prototype: HTMLEwsHexShapeElement;
         new (): HTMLEwsHexShapeElement;
     };
+    interface HTMLEwsStripeBarElement extends Components.EwsStripeBar, HTMLStencilElement {
+    }
+    var HTMLEwsStripeBarElement: {
+        prototype: HTMLEwsStripeBarElement;
+        new (): HTMLEwsStripeBarElement;
+    };
     interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
     }
     var HTMLMyComponentElement: {
@@ -100,6 +132,7 @@ declare global {
     interface HTMLElementTagNameMap {
         "ews-card": HTMLEwsCardElement;
         "ews-hex-shape": HTMLEwsHexShapeElement;
+        "ews-stripe-bar": HTMLEwsStripeBarElement;
         "my-component": HTMLMyComponentElement;
     }
 }
@@ -150,6 +183,32 @@ declare namespace LocalJSX {
          */
         "paddingContent"?: number;
     }
+    interface EwsStripeBar {
+        /**
+          * @default ''
+         */
+        "color"?: string;
+        /**
+          * @default 10
+         */
+        "duration"?: number;
+        /**
+          * @default false
+         */
+        "loop"?: boolean;
+        /**
+          * @default ''
+         */
+        "orientation"?: string;
+        /**
+          * @default false
+         */
+        "reverse"?: boolean;
+        /**
+          * @default '30px'
+         */
+        "size"?: string;
+    }
     interface MyComponent {
         /**
           * The first name
@@ -177,6 +236,14 @@ declare namespace LocalJSX {
         "clipContent": boolean;
         "paddingContent": number;
     }
+    interface EwsStripeBarAttributes {
+        "color": string;
+        "orientation": string;
+        "loop": boolean;
+        "reverse": boolean;
+        "duration": number;
+        "size": string;
+    }
     interface MyComponentAttributes {
         "first": string;
         "middle": string;
@@ -186,6 +253,7 @@ declare namespace LocalJSX {
     interface IntrinsicElements {
         "ews-card": Omit<EwsCard, keyof EwsCardAttributes> & { [K in keyof EwsCard & keyof EwsCardAttributes]?: EwsCard[K] } & { [K in keyof EwsCard & keyof EwsCardAttributes as `attr:${K}`]?: EwsCardAttributes[K] } & { [K in keyof EwsCard & keyof EwsCardAttributes as `prop:${K}`]?: EwsCard[K] };
         "ews-hex-shape": Omit<EwsHexShape, keyof EwsHexShapeAttributes> & { [K in keyof EwsHexShape & keyof EwsHexShapeAttributes]?: EwsHexShape[K] } & { [K in keyof EwsHexShape & keyof EwsHexShapeAttributes as `attr:${K}`]?: EwsHexShapeAttributes[K] } & { [K in keyof EwsHexShape & keyof EwsHexShapeAttributes as `prop:${K}`]?: EwsHexShape[K] };
+        "ews-stripe-bar": Omit<EwsStripeBar, keyof EwsStripeBarAttributes> & { [K in keyof EwsStripeBar & keyof EwsStripeBarAttributes]?: EwsStripeBar[K] } & { [K in keyof EwsStripeBar & keyof EwsStripeBarAttributes as `attr:${K}`]?: EwsStripeBarAttributes[K] } & { [K in keyof EwsStripeBar & keyof EwsStripeBarAttributes as `prop:${K}`]?: EwsStripeBar[K] };
         "my-component": Omit<MyComponent, keyof MyComponentAttributes> & { [K in keyof MyComponent & keyof MyComponentAttributes]?: MyComponent[K] } & { [K in keyof MyComponent & keyof MyComponentAttributes as `attr:${K}`]?: MyComponentAttributes[K] } & { [K in keyof MyComponent & keyof MyComponentAttributes as `prop:${K}`]?: MyComponent[K] };
     }
 }
@@ -195,6 +263,7 @@ declare module "@stencil/core" {
         interface IntrinsicElements {
             "ews-card": LocalJSX.IntrinsicElements["ews-card"] & JSXBase.HTMLAttributes<HTMLEwsCardElement>;
             "ews-hex-shape": LocalJSX.IntrinsicElements["ews-hex-shape"] & JSXBase.HTMLAttributes<HTMLEwsHexShapeElement>;
+            "ews-stripe-bar": LocalJSX.IntrinsicElements["ews-stripe-bar"] & JSXBase.HTMLAttributes<HTMLEwsStripeBarElement>;
             "my-component": LocalJSX.IntrinsicElements["my-component"] & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
         }
     }

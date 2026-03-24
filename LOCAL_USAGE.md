@@ -81,6 +81,7 @@ export default defineConfig({
 // Mengimport dan register secara eksplisit (lebih stabil untuk development/npm link)
 import 'ews-component/components/ews-card';
 import 'ews-component/components/ews-hex-shape';
+import 'ews-component/components/ews-stripe-bar';
 ```
 
 Atau jika ingin loader otomatis (namun kadang terkendala `npm link`):
@@ -109,6 +110,8 @@ Jika ingin menggunakan langsung di file HTML tanpa build tool:
   </ews-card>
 
   <ews-hex-shape color="#3498db" size="120"></ews-hex-shape>
+
+  <ews-stripe-bar color="red" loop="true" duration="10"></ews-stripe-bar>
 
 </body>
 </html>
