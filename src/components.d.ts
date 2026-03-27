@@ -21,6 +21,31 @@ export namespace Components {
          */
         "customStyle"?: string;
     }
+    interface EwsHexGrid {
+        /**
+          * Additional CSS class for the container.
+          * @default ''
+         */
+        "customClass": string;
+        /**
+          * Gap between hex cells in pixels.
+          * @default 4
+         */
+        "gap": number;
+        /**
+          * Height of each hex cell in pixels.
+         */
+        "hexHeight": number;
+        /**
+          * Width of each hex cell in pixels.
+         */
+        "hexWidth": number;
+        /**
+          * Hex orientation variant: 'pointy' or 'flat'.
+          * @default 'pointy'
+         */
+        "variant": 'pointy' | 'flat';
+    }
     interface EwsHexShape {
         /**
           * Whether to clip content within the hex shape.
@@ -111,6 +136,12 @@ declare global {
         prototype: HTMLEwsCardElement;
         new (): HTMLEwsCardElement;
     };
+    interface HTMLEwsHexGridElement extends Components.EwsHexGrid, HTMLStencilElement {
+    }
+    var HTMLEwsHexGridElement: {
+        prototype: HTMLEwsHexGridElement;
+        new (): HTMLEwsHexGridElement;
+    };
     interface HTMLEwsHexShapeElement extends Components.EwsHexShape, HTMLStencilElement {
     }
     var HTMLEwsHexShapeElement: {
@@ -131,6 +162,7 @@ declare global {
     };
     interface HTMLElementTagNameMap {
         "ews-card": HTMLEwsCardElement;
+        "ews-hex-grid": HTMLEwsHexGridElement;
         "ews-hex-shape": HTMLEwsHexShapeElement;
         "ews-stripe-bar": HTMLEwsStripeBarElement;
         "my-component": HTMLMyComponentElement;
@@ -155,6 +187,31 @@ declare namespace LocalJSX {
           * Emitted when the card toggles open/close state
          */
         "onToggle"?: (event: EwsCardCustomEvent<void>) => void;
+    }
+    interface EwsHexGrid {
+        /**
+          * Additional CSS class for the container.
+          * @default ''
+         */
+        "customClass"?: string;
+        /**
+          * Gap between hex cells in pixels.
+          * @default 4
+         */
+        "gap"?: number;
+        /**
+          * Height of each hex cell in pixels.
+         */
+        "hexHeight"?: number;
+        /**
+          * Width of each hex cell in pixels.
+         */
+        "hexWidth"?: number;
+        /**
+          * Hex orientation variant: 'pointy' or 'flat'.
+          * @default 'pointy'
+         */
+        "variant"?: 'pointy' | 'flat';
     }
     interface EwsHexShape {
         /**
@@ -229,6 +286,13 @@ declare namespace LocalJSX {
         "color": string;
         "customStyle": string;
     }
+    interface EwsHexGridAttributes {
+        "customClass": string;
+        "variant": 'pointy' | 'flat';
+        "hexWidth": number;
+        "hexHeight": number;
+        "gap": number;
+    }
     interface EwsHexShapeAttributes {
         "customClass": string;
         "color": string;
@@ -252,6 +316,7 @@ declare namespace LocalJSX {
 
     interface IntrinsicElements {
         "ews-card": Omit<EwsCard, keyof EwsCardAttributes> & { [K in keyof EwsCard & keyof EwsCardAttributes]?: EwsCard[K] } & { [K in keyof EwsCard & keyof EwsCardAttributes as `attr:${K}`]?: EwsCardAttributes[K] } & { [K in keyof EwsCard & keyof EwsCardAttributes as `prop:${K}`]?: EwsCard[K] };
+        "ews-hex-grid": Omit<EwsHexGrid, keyof EwsHexGridAttributes> & { [K in keyof EwsHexGrid & keyof EwsHexGridAttributes]?: EwsHexGrid[K] } & { [K in keyof EwsHexGrid & keyof EwsHexGridAttributes as `attr:${K}`]?: EwsHexGridAttributes[K] } & { [K in keyof EwsHexGrid & keyof EwsHexGridAttributes as `prop:${K}`]?: EwsHexGrid[K] };
         "ews-hex-shape": Omit<EwsHexShape, keyof EwsHexShapeAttributes> & { [K in keyof EwsHexShape & keyof EwsHexShapeAttributes]?: EwsHexShape[K] } & { [K in keyof EwsHexShape & keyof EwsHexShapeAttributes as `attr:${K}`]?: EwsHexShapeAttributes[K] } & { [K in keyof EwsHexShape & keyof EwsHexShapeAttributes as `prop:${K}`]?: EwsHexShape[K] };
         "ews-stripe-bar": Omit<EwsStripeBar, keyof EwsStripeBarAttributes> & { [K in keyof EwsStripeBar & keyof EwsStripeBarAttributes]?: EwsStripeBar[K] } & { [K in keyof EwsStripeBar & keyof EwsStripeBarAttributes as `attr:${K}`]?: EwsStripeBarAttributes[K] } & { [K in keyof EwsStripeBar & keyof EwsStripeBarAttributes as `prop:${K}`]?: EwsStripeBar[K] };
         "my-component": Omit<MyComponent, keyof MyComponentAttributes> & { [K in keyof MyComponent & keyof MyComponentAttributes]?: MyComponent[K] } & { [K in keyof MyComponent & keyof MyComponentAttributes as `attr:${K}`]?: MyComponentAttributes[K] } & { [K in keyof MyComponent & keyof MyComponentAttributes as `prop:${K}`]?: MyComponent[K] };
@@ -262,6 +327,7 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "ews-card": LocalJSX.IntrinsicElements["ews-card"] & JSXBase.HTMLAttributes<HTMLEwsCardElement>;
+            "ews-hex-grid": LocalJSX.IntrinsicElements["ews-hex-grid"] & JSXBase.HTMLAttributes<HTMLEwsHexGridElement>;
             "ews-hex-shape": LocalJSX.IntrinsicElements["ews-hex-shape"] & JSXBase.HTMLAttributes<HTMLEwsHexShapeElement>;
             "ews-stripe-bar": LocalJSX.IntrinsicElements["ews-stripe-bar"] & JSXBase.HTMLAttributes<HTMLEwsStripeBarElement>;
             "my-component": LocalJSX.IntrinsicElements["my-component"] & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
