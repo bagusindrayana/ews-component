@@ -5,10 +5,182 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
     <title>Stencil Component Starter</title>
 
-    <script type="module" src="/build/ews-component.esm.js"></script>
-    <script nomodule src="/build/ews-component.js"></script>
+    <script type="module" src="/dist/ews-component/ews-component.esm.js"></script>
+    <script nomodule src="/dist/index.js"></script>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f5f5f5;
+      }
+      h1 {
+        color: #333;
+        border-bottom: 2px solid #007bff;
+        padding-bottom: 10px;
+      }
+      h2 {
+        color: #555;
+        margin-top: 30px;
+      }
+      .example-section {
+        background: white;
+        padding: 20px;
+        margin: 20px 0;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+      .example-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        margin-top: 15px;
+        align-items: center;
+      }
+      .example-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .example-label {
+        margin-top: 10px;
+        font-size: 12px;
+        color: #666;
+      }
+    </style>
   </head>
   <body>
-    <my-component first="Stencil" middle="'Don't call me a framework'" last="JS"></my-component>
+    <h1>EWS Component Examples</h1>
+
+    <!-- my-component Examples -->
+    <div class="example-section">
+      <h2>my-component</h2>
+      <p>A simple component for displaying names with first, middle, and last properties.</p>
+      <div class="example-row">
+        <div class="example-item">
+          <my-component first="John" middle="Michael" last="Doe"></my-component>
+          <span class="example-label">Full name</span>
+        </div>
+        <div class="example-item">
+          <my-component first="Jane" last="Smith"></my-component>
+          <span class="example-label">Without middle name</span>
+        </div>
+        <div class="example-item">
+          <my-component first="Stencil" middle="'Don't call me a framework'" last="JS"></my-component>
+          <span class="example-label">Original example</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ews-card Examples -->
+    <div class="example-section">
+      <h2>ews-card</h2>
+      <p>A collapsible card component with customizable colors and styling.</p>
+      <div class="example-row">
+        <div class="example-item">
+          <ews-card color="red">
+            <div slot="header">Red Card Header</div>
+            <div slot="content">This is the content of a red card. Click the header to toggle.</div>
+          </ews-card>
+          <span class="example-label">Red color</span>
+        </div>
+        <div class="example-item">
+          <ews-card color="orange">
+            <div slot="header">Orange Card Header</div>
+            <div slot="content">This is the content of an orange card.</div>
+          </ews-card>
+          <span class="example-label">Orange color</span>
+        </div>
+        <div class="example-item">
+          <ews-card custom-class="custom-card">
+            <div slot="header">Custom Styled Card</div>
+            <div slot="content">Card with custom CSS class applied.</div>
+          </ews-card>
+          <span class="example-label">Custom class</span>
+        </div>
+        <div class="example-item">
+          <ews-card custom-style="border-width: 4px; border-radius: 12px;">
+            <div slot="header">Inline Styled Card</div>
+            <div slot="content">Card with inline custom styles.</div>
+          </ews-card>
+          <span class="example-label">Custom inline style</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ews-hex-shape Examples -->
+    <div class="example-section">
+      <h2>ews-hex-shape</h2>
+      <p>A hexagonal shape component with various configuration options.</p>
+      <div class="example-row" >
+        <div class="example-item">
+          <ews-hex-shape>
+            <div style="padding: 20px; text-align: center; color: white;">Blue Hex</div>
+          </ews-hex-shape>
+          <span class="example-label">Default</span>
+        </div>
+        <div class="example-item">
+          <ews-hex-shape flat-top="false">
+            <div style="padding: 20px; text-align: center; color: white;">Pointy Top</div>
+          </ews-hex-shape>
+          <span class="example-label">Pointy top</span>
+        </div>
+        
+        <div class="example-item">
+          <ews-hex-shape color="red">
+            <div style="text-align: center; color: #333;">More Padding</div>
+          </ews-hex-shape>
+          <span class="example-label">Red</span>
+        </div>
+
+        <div class="example-item">
+          <ews-hex-shape clip-content="true" style="width: 150px; height: 150px;">
+            <div style="padding: 20px; text-align: center; color: white; background: rgba(0,0,0,0.3);">
+              Clipped Content - This text is clipped within the hex boundary
+            </div>
+          </ews-hex-shape>
+          <span class="example-label">Clipped content</span>
+        </div>
+        
+      </div>
+    </div>
+
+    <!-- ews-stripe-bar Examples -->
+    <div class="example-section">
+      <h2>ews-stripe-bar</h2>
+      <p>An animated stripe bar component with various customization options.</p>
+      <div class="example-row">
+        <div class="example-item">
+          <ews-stripe-bar style="width: 200px;"></ews-stripe-bar>
+          <span class="example-label">Default</span>
+        </div>
+        <div class="example-item">
+          <ews-stripe-bar color="red" style="width: 200px;"></ews-stripe-bar>
+          <span class="example-label">Red</span>
+        </div>
+
+        <div class="example-item">
+          <ews-stripe-bar color="red" loop="true" style="width: 200px;"></ews-stripe-bar>
+          <span class="example-label">Animated</span>
+        </div>
+
+        <div class="example-item">
+          <ews-stripe-bar loop="true" reverse="true" style="width: 200px;"></ews-stripe-bar>
+          <span class="example-label">Reverse</span>
+        </div>
+       
+      </div>
+    </div>
+
+    <script>
+      // Example of listening to ews-card toggle events
+      document.querySelectorAll('ews-card').forEach(card => {
+        card.addEventListener('toggle', () => {
+          console.log('Card toggled!');
+        });
+      });
+    </script>
   </body>
 </html>
