@@ -14,7 +14,7 @@ export class EwsHexShape {
   /**
    * The color variant of the hex shape.
    */
-  @Prop() color: string = '';
+  @Prop() color: string = 'orange';
 
   /**
    * Whether the hex shape has a flat top.

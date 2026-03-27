@@ -84,6 +84,7 @@ export class EwsCard {
 
         <div class="ews-card-content">
           <slot />
+          <slot name="content" />
         </div>
 
         {this.hasFooter && (

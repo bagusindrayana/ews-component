@@ -29,7 +29,7 @@ export namespace Components {
         "clipContent": boolean;
         /**
           * The color variant of the hex shape.
-          * @default ''
+          * @default 'orange'
          */
         "color": string;
         /**
@@ -164,7 +164,7 @@ declare namespace LocalJSX {
         "clipContent"?: boolean;
         /**
           * The color variant of the hex shape.
-          * @default ''
+          * @default 'orange'
          */
         "color"?: string;
         /**
