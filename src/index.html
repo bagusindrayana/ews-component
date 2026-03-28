@@ -12,7 +12,7 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      width: 100%;
+
       margin: 0 auto;
       padding: 20px;
       background-color: #f5f5f5;
@@ -35,6 +35,7 @@
       margin: 20px 0;
       border-radius: 8px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      max-width: 100%;
     }
 
     .example-row {
@@ -49,6 +50,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      max-width: 100%;
     }
 
     .example-label {
@@ -83,6 +85,50 @@
         </ews-card>
         <span class="example-label">Orange color</span>
       </div>
+      <div class="example-item">
+        <ews-card color="orange" style="max-width: 400px;">
+          <div slot="header">
+            <ews-stripe-bar></ews-stripe-bar>
+            <div class="ews-card-text">
+              <p style="padding: 2px; text-align: center;background-color: black;">WARNING</p>
+            </div>
+          </div>
+          <div slot="content">
+            <div style="padding: 6px; text-align: center;">
+              WARNING CONTENT NEED YOUR ATENTION
+            </div>
+          </div>
+          <div slot="footer">
+            <ews-stripe-bar reverse="true"></ews-stripe-bar>
+            <div class="ews-card-text">
+              <p style="padding: 2px; text-align: center;background-color: black;">WARNING</p>
+            </div>
+          </div>
+        </ews-card>
+        <span class="example-label">Custom</span>
+      </div>
+      <div class="example-item">
+        <ews-card color="red" style="max-width: 400px;">
+          <div slot="header">
+            <ews-stripe-bar color="red" loop="true"></ews-stripe-bar>
+            <div class="ews-card-text">
+              <p style="padding: 2px; text-align: center;background-color: black;">DANGER</p>
+            </div>
+          </div>
+          <div slot="content">
+            <div style="padding: 6px; text-align: center;">
+              DANGER CONTENT NEED YOUR ATENTION
+            </div>
+          </div>
+          <div slot="footer">
+            <ews-stripe-bar color="red" loop="true" reverse="true"></ews-stripe-bar>
+            <div class="ews-card-text">
+              <p style="padding: 2px; text-align: center;background-color: black;">DANGER</p>
+            </div>
+          </div>
+        </ews-card>
+        <span class="example-label">Custom</span>
+      </div>
     </div>
   </div>
 
@@ -92,22 +138,20 @@
     <p>A hexagonal shape component with various configuration options.</p>
     <div class="example-row">
       <div class="example-item">
-        <ews-hex-shape>
+        <ews-hex-shape style="width: 150px;">
           <div style="padding: 20px; text-align: center; color: white;">Blue Hex</div>
         </ews-hex-shape>
         <span class="example-label">Default</span>
       </div>
       <div class="example-item">
-        <ews-hex-shape flat-top="false">
+        <ews-hex-shape flat-top="false" style="width: 150px;">
           <div style="padding: 20px; text-align: center; color: white;">Pointy Top</div>
         </ews-hex-shape>
         <span class="example-label">Pointy top</span>
       </div>
 
       <div class="example-item">
-        <ews-hex-shape color="red">
-          <div style="text-align: center; color: #333;">More Padding</div>
-        </ews-hex-shape>
+        <ews-hex-shape color="red" style="width: 150px;"></ews-hex-shape>
         <span class="example-label">Red</span>
       </div>
 
@@ -144,6 +188,28 @@
 
       <div class="example-item">
         <ews-stripe-bar loop="true" reverse="true" style="width: 200px;"></ews-stripe-bar>
+        <span class="example-label">Reverse</span>
+      </div>
+
+    </div>
+
+    <div class="example-row">
+      <div class="example-item">
+        <ews-stripe-bar orientation="vertical" style="height: 200px;"></ews-stripe-bar>
+        <span class="example-label">Default</span>
+      </div>
+      <div class="example-item">
+        <ews-stripe-bar color="red" orientation="vertical" style="height: 200px;"></ews-stripe-bar>
+        <span class="example-label">Red</span>
+      </div>
+
+      <div class="example-item">
+        <ews-stripe-bar color="red" orientation="vertical" loop="true" style="height: 200px;"></ews-stripe-bar>
+        <span class="example-label">Animated</span>
+      </div>
+
+      <div class="example-item">
+        <ews-stripe-bar loop="true" orientation="vertical" reverse="true" style="height: 200px;"></ews-stripe-bar>
         <span class="example-label">Reverse</span>
       </div>
 
@@ -196,8 +262,7 @@
   <div class="example-section">
     <h2>ews-rib-layout</h2>
     <p>A complex rib cage layout with responsive branching and animated nodes.</p>
-    <div
-      style="background: #1a1a1a; padding: 40px 0; border-radius: 8px; margin-top: 15px; min-height: 600px; overflow-x: auto;">
+    <div style="padding: 40px 0; border-radius: 8px; margin-top: 15px; min-height: 600px; overflow-x: auto;">
       <ews-rib-layout id="rib-example"></ews-rib-layout>
     </div>
   </div>
