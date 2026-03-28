@@ -76,3 +76,7 @@ defineCustomElements();
 ## Documentation
 
 For more detailed information on specific components, please refer to the documentation in each component's directory or the official [StencilJS documentation](https://stenciljs.com/docs/introduction).
+
+
+## Support Me!
+[![Support me on Sociabuzz](https://img.shields.io/badge/Support%20Me-Sociabuzz-orange?style=for-the-badge&logo=buymeacoffee&logoColor=white)](https://sociabuzz.com/bagusindrayana/tribe)
