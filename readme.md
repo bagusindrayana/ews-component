@@ -78,5 +78,28 @@ defineCustomElements();
 For more detailed information on specific components, please refer to the documentation in each component's directory or the official [StencilJS documentation](https://stenciljs.com/docs/introduction).
 
 
+## Contributing & Adding New Components
+
+To maintain consistency, please follow these steps when adding a new component:
+
+1.  **Generate Component**:
+    Use the Stencil CLI to scaffold your component:
+    ```bash
+    npm run generate
+    ```
+    *Input the name with `ews-` prefix (e.g., `ews-new-button`).*
+
+2.  **Naming & Directory**:
+    -   **Folder**: `src/components/ews-[name]/`
+    -   **Tag Name**: `ews-[name]`
+    -   **Class Name**: `Ews[Name]` (PascalCase)
+
+3.  **Code Style Guidelines**:
+    -   **TypeScript & TSX**: Always use TypeScript/TSX for component logic.
+    -   **Styling**: Use a dedicated CSS file (`[name].css`). Prefix all classes with `ews-` (e.g., `.ews-card`) to avoid global style collisions.
+    -   **Reactivity**: Use `@Prop()`, `@State()`, and `@Event()` decorators for state management and communication.
+    -   **Documentation**: Write clear JSDoc comments for props and events; Stencil will automatically update the component's `readme.md`.
+
+
 ## Support Me!
 [![Support me on Sociabuzz](https://img.shields.io/badge/Support%20Me-Sociabuzz-orange?style=for-the-badge&logo=buymeacoffee&logoColor=white)](https://sociabuzz.com/bagusindrayana/tribe)
