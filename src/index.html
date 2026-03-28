@@ -12,7 +12,7 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      max-width: 1200px;
+      width: 100%;
       margin: 0 auto;
       padding: 20px;
       background-color: #f5f5f5;
@@ -192,7 +192,64 @@
   </div>
 
 
+  <!-- ews-rib-layout Examples -->
+  <div class="example-section">
+    <h2>ews-rib-layout</h2>
+    <p>A complex rib cage layout with responsive branching and animated nodes.</p>
+    <div
+      style="background: #1a1a1a; padding: 40px 0; border-radius: 8px; margin-top: 15px; min-height: 600px; overflow-x: auto;">
+      <ews-rib-layout id="rib-example"></ews-rib-layout>
+    </div>
+  </div>
+
   <script>
+    // Example for ews-rib-layout with 50 items
+    const ribLayout = document.getElementById('rib-example');
+
+    if (ribLayout) {
+      // Generate 50 items
+      const statuses = Array.from({ length: 50 }, (_, i) => ({
+        id: i + 1,
+        title: `STN ${String.fromCharCode(65 + (i % 26))}${Math.floor(i / 26) + 1}`,
+        networkCode: 'NET' + (i % 5),
+        stationCode: 'STA' + i,
+        type: i % 7 === 0 ? 'danger' : 'normal',
+        value: Math.floor(Math.random() * 100)
+      }));
+
+      ribLayout.items = statuses;
+
+      // Set href generator
+      ribLayout.getHref = (item) =>
+        `#/realtime?networkCode=${item.networkCode}&stationCode=${item.stationCode}`;
+
+      // Set node content renderer
+      // Note: In plain JS, we can return a string or a DOM element if the component handles it,
+      // but for Stencil JSX props, a function returning a VNode or DOM element is best.
+      // Here we provide a simple renderer that leverages the CSS classes ported.
+      ribLayout.nodeRenderer = (item, { side, delay }) => {
+        console.log(item);
+        const div = document.createElement('div');
+        const isRight = side === 'right';
+        const isDanger = item.type === 'danger';
+
+        // Match the classes from the Svelte snippet
+        div.className = `slide-fade-in ews-rib-node ${isRight ? 'flip' : ''} ${isDanger ? 'danger' : ''} z-5 text-black text-xs font-bold`;
+        div.style.animationDelay = `${delay}ms`;
+        div.style.display = 'flex';
+        div.style.alignItems = 'center';
+        div.style.justifyContent = 'center';
+        div.style.color = 'black';
+        div.style.fontSize = '10px';
+        div.innerHTML = `<span>${item.value}</span>`;
+
+        return div;
+      };
+
+      // Set connector content renderer
+      ribLayout.connectorRenderer = (item) => item.title;
+    }
+
     // Example of listening to ews-card toggle events
     document.querySelectorAll('ews-card').forEach(card => {
       card.addEventListener('toggle', () => {
