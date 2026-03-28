@@ -73,6 +73,29 @@ export namespace Components {
          */
         "paddingContent": number;
     }
+    interface EwsRibLayout {
+        /**
+          * Optional renderer function for the connector content.
+         */
+        "connectorRenderer"?: (item: any, props: { side: 'left' | 'right'; branchIndex: number; index: number; delay: number }) => any;
+        /**
+          * Function to get the href for a node. If provided, nodes will be rendered as <a> tags.
+         */
+        "getHref"?: (item: any) => string;
+        /**
+          * Array of items to be displayed in the rib cage layout.
+          * @default []
+         */
+        "items": any[];
+        /**
+          * Maximum number of branches to display. If not provided, it defaults to 5 (responsive).
+         */
+        "maxBranches"?: number;
+        /**
+          * Optional renderer function for the node content.
+         */
+        "nodeRenderer"?: (item: any, props: { side: 'left' | 'right'; branchIndex: number; index: number; delay: number }) => any;
+    }
     interface EwsStripeBar {
         /**
           * @default ''
@@ -148,6 +171,12 @@ declare global {
         prototype: HTMLEwsHexShapeElement;
         new (): HTMLEwsHexShapeElement;
     };
+    interface HTMLEwsRibLayoutElement extends Components.EwsRibLayout, HTMLStencilElement {
+    }
+    var HTMLEwsRibLayoutElement: {
+        prototype: HTMLEwsRibLayoutElement;
+        new (): HTMLEwsRibLayoutElement;
+    };
     interface HTMLEwsStripeBarElement extends Components.EwsStripeBar, HTMLStencilElement {
     }
     var HTMLEwsStripeBarElement: {
@@ -164,6 +193,7 @@ declare global {
         "ews-card": HTMLEwsCardElement;
         "ews-hex-grid": HTMLEwsHexGridElement;
         "ews-hex-shape": HTMLEwsHexShapeElement;
+        "ews-rib-layout": HTMLEwsRibLayoutElement;
         "ews-stripe-bar": HTMLEwsStripeBarElement;
         "my-component": HTMLMyComponentElement;
     }
@@ -240,6 +270,29 @@ declare namespace LocalJSX {
          */
         "paddingContent"?: number;
     }
+    interface EwsRibLayout {
+        /**
+          * Optional renderer function for the connector content.
+         */
+        "connectorRenderer"?: (item: any, props: { side: 'left' | 'right'; branchIndex: number; index: number; delay: number }) => any;
+        /**
+          * Function to get the href for a node. If provided, nodes will be rendered as <a> tags.
+         */
+        "getHref"?: (item: any) => string;
+        /**
+          * Array of items to be displayed in the rib cage layout.
+          * @default []
+         */
+        "items"?: any[];
+        /**
+          * Maximum number of branches to display. If not provided, it defaults to 5 (responsive).
+         */
+        "maxBranches"?: number;
+        /**
+          * Optional renderer function for the node content.
+         */
+        "nodeRenderer"?: (item: any, props: { side: 'left' | 'right'; branchIndex: number; index: number; delay: number }) => any;
+    }
     interface EwsStripeBar {
         /**
           * @default ''
@@ -300,6 +353,9 @@ declare namespace LocalJSX {
         "clipContent": boolean;
         "paddingContent": number;
     }
+    interface EwsRibLayoutAttributes {
+        "maxBranches": number;
+    }
     interface EwsStripeBarAttributes {
         "color": string;
         "orientation": string;
@@ -318,6 +374,7 @@ declare namespace LocalJSX {
         "ews-card": Omit<EwsCard, keyof EwsCardAttributes> & { [K in keyof EwsCard & keyof EwsCardAttributes]?: EwsCard[K] } & { [K in keyof EwsCard & keyof EwsCardAttributes as `attr:${K}`]?: EwsCardAttributes[K] } & { [K in keyof EwsCard & keyof EwsCardAttributes as `prop:${K}`]?: EwsCard[K] };
         "ews-hex-grid": Omit<EwsHexGrid, keyof EwsHexGridAttributes> & { [K in keyof EwsHexGrid & keyof EwsHexGridAttributes]?: EwsHexGrid[K] } & { [K in keyof EwsHexGrid & keyof EwsHexGridAttributes as `attr:${K}`]?: EwsHexGridAttributes[K] } & { [K in keyof EwsHexGrid & keyof EwsHexGridAttributes as `prop:${K}`]?: EwsHexGrid[K] };
         "ews-hex-shape": Omit<EwsHexShape, keyof EwsHexShapeAttributes> & { [K in keyof EwsHexShape & keyof EwsHexShapeAttributes]?: EwsHexShape[K] } & { [K in keyof EwsHexShape & keyof EwsHexShapeAttributes as `attr:${K}`]?: EwsHexShapeAttributes[K] } & { [K in keyof EwsHexShape & keyof EwsHexShapeAttributes as `prop:${K}`]?: EwsHexShape[K] };
+        "ews-rib-layout": Omit<EwsRibLayout, keyof EwsRibLayoutAttributes> & { [K in keyof EwsRibLayout & keyof EwsRibLayoutAttributes]?: EwsRibLayout[K] } & { [K in keyof EwsRibLayout & keyof EwsRibLayoutAttributes as `attr:${K}`]?: EwsRibLayoutAttributes[K] } & { [K in keyof EwsRibLayout & keyof EwsRibLayoutAttributes as `prop:${K}`]?: EwsRibLayout[K] };
         "ews-stripe-bar": Omit<EwsStripeBar, keyof EwsStripeBarAttributes> & { [K in keyof EwsStripeBar & keyof EwsStripeBarAttributes]?: EwsStripeBar[K] } & { [K in keyof EwsStripeBar & keyof EwsStripeBarAttributes as `attr:${K}`]?: EwsStripeBarAttributes[K] } & { [K in keyof EwsStripeBar & keyof EwsStripeBarAttributes as `prop:${K}`]?: EwsStripeBar[K] };
         "my-component": Omit<MyComponent, keyof MyComponentAttributes> & { [K in keyof MyComponent & keyof MyComponentAttributes]?: MyComponent[K] } & { [K in keyof MyComponent & keyof MyComponentAttributes as `attr:${K}`]?: MyComponentAttributes[K] } & { [K in keyof MyComponent & keyof MyComponentAttributes as `prop:${K}`]?: MyComponent[K] };
     }
@@ -329,6 +386,7 @@ declare module "@stencil/core" {
             "ews-card": LocalJSX.IntrinsicElements["ews-card"] & JSXBase.HTMLAttributes<HTMLEwsCardElement>;
             "ews-hex-grid": LocalJSX.IntrinsicElements["ews-hex-grid"] & JSXBase.HTMLAttributes<HTMLEwsHexGridElement>;
             "ews-hex-shape": LocalJSX.IntrinsicElements["ews-hex-shape"] & JSXBase.HTMLAttributes<HTMLEwsHexShapeElement>;
+            "ews-rib-layout": LocalJSX.IntrinsicElements["ews-rib-layout"] & JSXBase.HTMLAttributes<HTMLEwsRibLayoutElement>;
             "ews-stripe-bar": LocalJSX.IntrinsicElements["ews-stripe-bar"] & JSXBase.HTMLAttributes<HTMLEwsStripeBarElement>;
             "my-component": LocalJSX.IntrinsicElements["my-component"] & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
         }
