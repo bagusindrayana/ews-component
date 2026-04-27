@@ -1,0 +1,27 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.infinite-scroll-container {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+}
+
+.infinite-scroll-track {
+  display: flex;
+  flex-wrap: nowrap;
+  will-change: transform;
+}
+
+.scroll-set {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+}
+
+/* Ensure children inside scroll-set are handled nicely */
+.scroll-set > * {
+  flex-shrink: 0;
+}

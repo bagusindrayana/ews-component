@@ -73,6 +73,33 @@ export namespace Components {
          */
         "paddingContent": number;
     }
+    interface EwsInfiniteScroll {
+        /**
+          * Additional CSS classes for the container
+          * @default ''
+         */
+        "customClass": string;
+        /**
+          * Scroll direction: 'left' or 'right'
+          * @default 'left'
+         */
+        "direction": 'left' | 'right';
+        /**
+          * Gap between items in pixels
+          * @default 24
+         */
+        "gap": number;
+        /**
+          * Pause animation on hover
+          * @default false
+         */
+        "pauseOnHover": boolean;
+        /**
+          * Scroll speed in pixels per second
+          * @default 80
+         */
+        "speed": number;
+    }
     interface EwsRibLayout {
         /**
           * Optional renderer function for the connector content.
@@ -171,6 +198,12 @@ declare global {
         prototype: HTMLEwsHexShapeElement;
         new (): HTMLEwsHexShapeElement;
     };
+    interface HTMLEwsInfiniteScrollElement extends Components.EwsInfiniteScroll, HTMLStencilElement {
+    }
+    var HTMLEwsInfiniteScrollElement: {
+        prototype: HTMLEwsInfiniteScrollElement;
+        new (): HTMLEwsInfiniteScrollElement;
+    };
     interface HTMLEwsRibLayoutElement extends Components.EwsRibLayout, HTMLStencilElement {
     }
     var HTMLEwsRibLayoutElement: {
@@ -193,6 +226,7 @@ declare global {
         "ews-card": HTMLEwsCardElement;
         "ews-hex-grid": HTMLEwsHexGridElement;
         "ews-hex-shape": HTMLEwsHexShapeElement;
+        "ews-infinite-scroll": HTMLEwsInfiniteScrollElement;
         "ews-rib-layout": HTMLEwsRibLayoutElement;
         "ews-stripe-bar": HTMLEwsStripeBarElement;
         "my-component": HTMLMyComponentElement;
@@ -269,6 +303,33 @@ declare namespace LocalJSX {
           * @default 10
          */
         "paddingContent"?: number;
+    }
+    interface EwsInfiniteScroll {
+        /**
+          * Additional CSS classes for the container
+          * @default ''
+         */
+        "customClass"?: string;
+        /**
+          * Scroll direction: 'left' or 'right'
+          * @default 'left'
+         */
+        "direction"?: 'left' | 'right';
+        /**
+          * Gap between items in pixels
+          * @default 24
+         */
+        "gap"?: number;
+        /**
+          * Pause animation on hover
+          * @default false
+         */
+        "pauseOnHover"?: boolean;
+        /**
+          * Scroll speed in pixels per second
+          * @default 80
+         */
+        "speed"?: number;
     }
     interface EwsRibLayout {
         /**
@@ -353,6 +414,13 @@ declare namespace LocalJSX {
         "clipContent": boolean;
         "paddingContent": number;
     }
+    interface EwsInfiniteScrollAttributes {
+        "gap": number;
+        "speed": number;
+        "direction": 'left' | 'right';
+        "pauseOnHover": boolean;
+        "customClass": string;
+    }
     interface EwsRibLayoutAttributes {
         "maxBranches": number;
     }
@@ -374,6 +442,7 @@ declare namespace LocalJSX {
         "ews-card": Omit<EwsCard, keyof EwsCardAttributes> & { [K in keyof EwsCard & keyof EwsCardAttributes]?: EwsCard[K] } & { [K in keyof EwsCard & keyof EwsCardAttributes as `attr:${K}`]?: EwsCardAttributes[K] } & { [K in keyof EwsCard & keyof EwsCardAttributes as `prop:${K}`]?: EwsCard[K] };
         "ews-hex-grid": Omit<EwsHexGrid, keyof EwsHexGridAttributes> & { [K in keyof EwsHexGrid & keyof EwsHexGridAttributes]?: EwsHexGrid[K] } & { [K in keyof EwsHexGrid & keyof EwsHexGridAttributes as `attr:${K}`]?: EwsHexGridAttributes[K] } & { [K in keyof EwsHexGrid & keyof EwsHexGridAttributes as `prop:${K}`]?: EwsHexGrid[K] };
         "ews-hex-shape": Omit<EwsHexShape, keyof EwsHexShapeAttributes> & { [K in keyof EwsHexShape & keyof EwsHexShapeAttributes]?: EwsHexShape[K] } & { [K in keyof EwsHexShape & keyof EwsHexShapeAttributes as `attr:${K}`]?: EwsHexShapeAttributes[K] } & { [K in keyof EwsHexShape & keyof EwsHexShapeAttributes as `prop:${K}`]?: EwsHexShape[K] };
+        "ews-infinite-scroll": Omit<EwsInfiniteScroll, keyof EwsInfiniteScrollAttributes> & { [K in keyof EwsInfiniteScroll & keyof EwsInfiniteScrollAttributes]?: EwsInfiniteScroll[K] } & { [K in keyof EwsInfiniteScroll & keyof EwsInfiniteScrollAttributes as `attr:${K}`]?: EwsInfiniteScrollAttributes[K] } & { [K in keyof EwsInfiniteScroll & keyof EwsInfiniteScrollAttributes as `prop:${K}`]?: EwsInfiniteScroll[K] };
         "ews-rib-layout": Omit<EwsRibLayout, keyof EwsRibLayoutAttributes> & { [K in keyof EwsRibLayout & keyof EwsRibLayoutAttributes]?: EwsRibLayout[K] } & { [K in keyof EwsRibLayout & keyof EwsRibLayoutAttributes as `attr:${K}`]?: EwsRibLayoutAttributes[K] } & { [K in keyof EwsRibLayout & keyof EwsRibLayoutAttributes as `prop:${K}`]?: EwsRibLayout[K] };
         "ews-stripe-bar": Omit<EwsStripeBar, keyof EwsStripeBarAttributes> & { [K in keyof EwsStripeBar & keyof EwsStripeBarAttributes]?: EwsStripeBar[K] } & { [K in keyof EwsStripeBar & keyof EwsStripeBarAttributes as `attr:${K}`]?: EwsStripeBarAttributes[K] } & { [K in keyof EwsStripeBar & keyof EwsStripeBarAttributes as `prop:${K}`]?: EwsStripeBar[K] };
         "my-component": Omit<MyComponent, keyof MyComponentAttributes> & { [K in keyof MyComponent & keyof MyComponentAttributes]?: MyComponent[K] } & { [K in keyof MyComponent & keyof MyComponentAttributes as `attr:${K}`]?: MyComponentAttributes[K] } & { [K in keyof MyComponent & keyof MyComponentAttributes as `prop:${K}`]?: MyComponent[K] };
@@ -386,6 +455,7 @@ declare module "@stencil/core" {
             "ews-card": LocalJSX.IntrinsicElements["ews-card"] & JSXBase.HTMLAttributes<HTMLEwsCardElement>;
             "ews-hex-grid": LocalJSX.IntrinsicElements["ews-hex-grid"] & JSXBase.HTMLAttributes<HTMLEwsHexGridElement>;
             "ews-hex-shape": LocalJSX.IntrinsicElements["ews-hex-shape"] & JSXBase.HTMLAttributes<HTMLEwsHexShapeElement>;
+            "ews-infinite-scroll": LocalJSX.IntrinsicElements["ews-infinite-scroll"] & JSXBase.HTMLAttributes<HTMLEwsInfiniteScrollElement>;
             "ews-rib-layout": LocalJSX.IntrinsicElements["ews-rib-layout"] & JSXBase.HTMLAttributes<HTMLEwsRibLayoutElement>;
             "ews-stripe-bar": LocalJSX.IntrinsicElements["ews-stripe-bar"] & JSXBase.HTMLAttributes<HTMLEwsStripeBarElement>;
             "my-component": LocalJSX.IntrinsicElements["my-component"] & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
