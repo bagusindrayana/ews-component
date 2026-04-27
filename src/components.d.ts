@@ -75,27 +75,22 @@ export namespace Components {
     }
     interface EwsInfiniteScroll {
         /**
-          * Additional CSS classes for the container
           * @default ''
          */
         "customClass": string;
         /**
-          * Scroll direction: 'left' or 'right'
           * @default 'left'
          */
         "direction": 'left' | 'right';
         /**
-          * Gap between items in pixels
           * @default 24
          */
         "gap": number;
         /**
-          * Pause animation on hover
           * @default false
          */
         "pauseOnHover": boolean;
         /**
-          * Scroll speed in pixels per second
           * @default 80
          */
         "speed": number;
@@ -311,27 +306,22 @@ declare namespace LocalJSX {
     }
     interface EwsInfiniteScroll {
         /**
-          * Additional CSS classes for the container
           * @default ''
          */
         "customClass"?: string;
         /**
-          * Scroll direction: 'left' or 'right'
           * @default 'left'
          */
         "direction"?: 'left' | 'right';
         /**
-          * Gap between items in pixels
           * @default 24
          */
         "gap"?: number;
         /**
-          * Pause animation on hover
           * @default false
          */
         "pauseOnHover"?: boolean;
         /**
-          * Scroll speed in pixels per second
           * @default 80
          */
         "speed"?: number;
