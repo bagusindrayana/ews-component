@@ -129,6 +129,11 @@ export namespace Components {
          */
         "color": string;
         /**
+          * Additional CSS classes to apply to the card wrapper
+          * @default ''
+         */
+        "customClass": string;
+        /**
           * @default 10
          */
         "duration": number;
@@ -360,6 +365,11 @@ declare namespace LocalJSX {
          */
         "color"?: string;
         /**
+          * Additional CSS classes to apply to the card wrapper
+          * @default ''
+         */
+        "customClass"?: string;
+        /**
           * @default 10
          */
         "duration"?: number;
@@ -425,6 +435,7 @@ declare namespace LocalJSX {
         "maxBranches": number;
     }
     interface EwsStripeBarAttributes {
+        "customClass": string;
         "color": string;
         "orientation": string;
         "loop": boolean;

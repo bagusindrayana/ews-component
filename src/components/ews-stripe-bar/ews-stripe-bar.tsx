@@ -6,6 +6,12 @@ import { Component, Host, h, Prop } from '@stencil/core';
   shadow: true,
 })
 export class EwsStripeBar {
+  /**
+     * Additional CSS classes to apply to the card wrapper
+     */
+  @Prop() customClass: string = '';
+
+
   @Prop() color: string = '';
   @Prop() orientation: string = '';
   @Prop() loop: boolean = false;
@@ -17,7 +23,7 @@ export class EwsStripeBar {
     const loopStr = this.loop ? 'loop-stripe' : '';
     const orientationStr = this.orientation ? `-${this.orientation}` : '';
     const combinedStr = loopStr + orientationStr;
-    
+
     return [
       'ews-stripe-bar',
       this.color,
@@ -31,7 +37,7 @@ export class EwsStripeBar {
   render() {
     return (
       <Host>
-        <div style={{ overflow: 'hidden', height: '100%', width: '100%' }} class="host-wrapper">
+        <div style={{ overflow: 'hidden', height: '100%', width: '100%' }} class={`host-wrapper ${this.customClass}`}>
           <div
             class={`ews-stripe-wrapper ${this.orientation}`}
             style={{ [this.orientation === 'vertical' ? 'width' : 'height']: this.size }}

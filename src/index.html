@@ -58,6 +58,68 @@
       font-size: 12px;
       color: #666;
     }
+
+    .ews-emergency-container {
+      display: flex;
+      width: 100%;
+      position: relative;
+      margin-bottom: 1rem;
+      overflow: hidden;
+      background-color: black;
+    }
+
+    .ews-emergency-bg {
+      display: flex;
+      width: 100%;
+    }
+
+    .ews-emergency-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .ews-emergency-box {
+      padding: 0.25rem;
+      background-color: black;
+
+      width: 100%;
+    }
+
+    .ews-emergency-inner {
+      border: 3px solid #ff3333;
+      background-color: black;
+      padding: 0.5rem;
+      width: 100%;
+      color: orange;
+      border-radius: 6px;
+    }
+
+    .ews-emergency-content {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
+    .ews-emergency-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+    }
+
+    .ews-emergency-title {
+      font-size: 2.25rem;
+      line-height: 0.8;
+      font-weight: bold;
+      margin: 4px 0;
+    }
   </style>
 </head>
 
@@ -264,6 +326,50 @@
     <p>A complex rib cage layout with responsive branching and animated nodes.</p>
     <div style="padding: 40px 0; border-radius: 8px; margin-top: 15px; min-height: 600px; overflow-x: auto;">
       <ews-rib-layout id="rib-example"></ews-rib-layout>
+    </div>
+  </div>
+
+  <div class="example-section">
+    <h2>Infinite Scroll</h2>
+    <div class="example-row">
+      <div class="example-item">
+        <ews-infinite-scroll speed="60" gap="48">
+          <p>content</p>
+        </ews-infinite-scroll>
+      </div>
+    </div>
+
+    <div class="example-row">
+      <div class="example-item">
+        <div class="ews-emergency-container">
+          <!-- Background dengan Stripe Bar -->
+          <div class="ews-emergency-bg">
+            <div style="width:50%;height:200px;">
+              <ews-stripe-bar size="200px"></ews-stripe-bar>
+            </div>
+            <div style="transform: scaleX(-1);width:50%;height:200px;">
+              <ews-stripe-bar size="200px"></ews-stripe-bar>
+            </div>
+
+          </div>
+          <div class="ews-emergency-overlay">
+            <div class="ews-emergency-box">
+              <div class="ews-emergency-inner">
+                <ews-infinite-scroll speed="60" gap="48">
+                  <div>
+                    <h2>
+                      Heading
+                    </h2>
+                    <p>
+                      Paragraf
+                    </p>
+                  </div>
+                </ews-infinite-scroll>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
