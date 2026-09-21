@@ -37,6 +37,13 @@ export class EwsInfiniteScroll {
       this.startAnimation();
     }, 50);
 
+    // Pastikan font loaded agar kalkulasi width akurat
+    if (typeof document !== 'undefined' && document.fonts?.ready) {
+      document.fonts.ready.then(() => {
+        this.initialSetup();
+      });
+    }
+
     this.setupObservers();
   }
 
@@ -48,6 +55,8 @@ export class EwsInfiniteScroll {
   private setupObservers() {
     this.resizeObserver = new ResizeObserver(() => {
       this.initialSetup();
+      this.offset = 0;
+      this.lastTime = null;
     });
     this.resizeObserver.observe(this.containerEl);
   }
@@ -64,9 +73,9 @@ export class EwsInfiniteScroll {
     if (rectW === 0) return;
     this.singleWidth = rectW + this.gap;
 
-    // 3. Hitung berapa klon yang dibutuhkan agar layar penuh
+    // 3. Hitung berapa klon yang dibutuhkan agar layar selalu penuh (minimal 2x container)
     const containerW = this.containerEl.offsetWidth;
-    const clonesNeeded = Math.ceil(containerW / this.singleWidth) + 1;
+    const clonesNeeded = Math.max(Math.ceil((containerW * 2) / this.singleWidth) + 1, 2);
 
     // 4. Lakukan klon secara manual
     // Kita menggunakan .cloneNode(true) agar semua element & style ikut terbawa
@@ -92,9 +101,11 @@ export class EwsInfiniteScroll {
         this.lastTime = ts;
 
         if (this.trackEl) {
-          const sign = this.direction === 'right' ? 1 : -1;
+          const x = this.direction === 'right'
+            ? (this.singleWidth > 0 ? -this.singleWidth + this.offset : 0)
+            : -this.offset;
           // Gunakan translate3d untuk akselerasi GPU agar tidak lag
-          this.trackEl.style.transform = `translate3d(${sign * this.offset}px, 0, 0)`;
+          this.trackEl.style.transform = `translate3d(${x}px, 0, 0)`;
         }
       } else {
         this.lastTime = ts;

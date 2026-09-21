@@ -120,6 +120,40 @@
       font-weight: bold;
       margin: 4px 0;
     }
+
+    @keyframes showPopUp {
+      0% {
+        opacity: 0;
+        transform: scale(0.5);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes closePopUp {
+      0% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(0.5);
+      }
+    }
+
+    .ews-hex-reveal-in {
+      opacity: 0;
+      animation: showPopUp var(--hex-reveal-duration, 0.3s) cubic-bezier(0.34, 1.56, 0.64, 1) both !important;
+      animation-delay: var(--hex-reveal-delay, 0ms) !important;
+    }
+
+    .ews-hex-reveal-out {
+      opacity: 1;
+      animation: closePopUp var(--hex-reveal-duration, 0.3s) cubic-bezier(0.25, 1, 0.5, 1) both !important;
+      animation-delay: var(--hex-reveal-delay, 0ms) !important;
+    }
   </style>
 </head>
 
@@ -279,43 +313,35 @@
   </div>
   <div class="example-section">
     <h2>ews-hex-grid</h2>
+    <p>Honeycomb grid with alignment and staggered reveal/exit animations.</p>
+
+    <div style="margin-bottom: 12px; display: flex; gap: 8px; flex-wrap: wrap;">
+      <button onclick="setHexReveal('center')">Reveal: Center</button>
+      <button onclick="setHexReveal('diagonal')">Reveal: Diagonal</button>
+      <button onclick="setHexReveal('random')">Reveal: Random</button>
+      <button onclick="toggleHexReverse()">Toggle Reverse (Exit/Enter)</button>
+      <button onclick="setHexAlign('left')">Align: Left</button>
+      <button onclick="setHexAlign('center')">Align: Center</button>
+      <button onclick="setHexAlign('right')">Align: Right</button>
+    </div>
 
     <div class="example-row">
-      <div class="example-item">
-        <ews-hex-grid variant="pointy" gap="1" style="width: 300px;">
-          <div class="ews-hex-hive">
-            <ews-hex-shape flat-top="false">Cell 1</ews-hex-shape>
-          </div>
-          <div class="ews-hex-hive">
-            <ews-hex-shape flat-top="false">Cell 2</ews-hex-shape>
-          </div>
-          <div class="ews-hex-hive">
-            <ews-hex-shape flat-top="false">Cell 3</ews-hex-shape>
-          </div>
-          <div class="ews-hex-hive">
-            <ews-hex-shape flat-top="false">Cell 4</ews-hex-shape>
-          </div>
-          <div class="ews-hex-hive">
-            <ews-hex-shape flat-top="false">Cell 5</ews-hex-shape>
-          </div>
-          <div class="ews-hex-hive">
-            <ews-hex-shape flat-top="false">Cell 6</ews-hex-shape>
-          </div>
-          <div class="ews-hex-hive">
-            <ews-hex-shape flat-top="false">Cell 7</ews-hex-shape>
-          </div>
-          <div class="ews-hex-hive">
-            <ews-hex-shape flat-top="false">Cell 8</ews-hex-shape>
-          </div>
-          <div class="ews-hex-hive">
-            <ews-hex-shape flat-top="false">Cell 9</ews-hex-shape>
-          </div>
-          <div class="ews-hex-hive">
-            <ews-hex-shape flat-top="false">Cell 10</ews-hex-shape>
-          </div>
+      <div class="example-item" style="width: 100%;">
+        <ews-hex-grid id="demo-hex-grid" variant="pointy" align="center" reveal-variant="center" gap="4" style="width: 100%; max-width: 480px; background: #111; padding: 16px; border-radius: 8px;">
+          <div class="ews-hex-hive"><ews-hex-shape color="orange" flat-top="false">01</ews-hex-shape></div>
+          <div class="ews-hex-hive"><ews-hex-shape color="orange" flat-top="false">02</ews-hex-shape></div>
+          <div class="ews-hex-hive"><ews-hex-shape color="orange" flat-top="false">03</ews-hex-shape></div>
+          <div class="ews-hex-hive"><ews-hex-shape color="orange" flat-top="false">04</ews-hex-shape></div>
+          <div class="ews-hex-hive"><ews-hex-shape color="orange" flat-top="false">05</ews-hex-shape></div>
+          <div class="ews-hex-hive"><ews-hex-shape color="orange" flat-top="false">06</ews-hex-shape></div>
+          <div class="ews-hex-hive"><ews-hex-shape color="orange" flat-top="false">07</ews-hex-shape></div>
+          <div class="ews-hex-hive"><ews-hex-shape color="orange" flat-top="false">08</ews-hex-shape></div>
+          <div class="ews-hex-hive"><ews-hex-shape color="orange" flat-top="false">09</ews-hex-shape></div>
+          <div class="ews-hex-hive"><ews-hex-shape color="orange" flat-top="false">10</ews-hex-shape></div>
+          <div class="ews-hex-hive"><ews-hex-shape color="orange" flat-top="false">11</ews-hex-shape></div>
+          <div class="ews-hex-hive"><ews-hex-shape color="orange" flat-top="false">12</ews-hex-shape></div>
         </ews-hex-grid>
       </div>
-
     </div>
   </div>
 
@@ -331,16 +357,35 @@
 
   <div class="example-section">
     <h2>Infinite Scroll</h2>
+    <p>Smooth continuous ticker with direction support (seamless left and right loop).</p>
+    
+    <h3>Direction: Left (Normal)</h3>
     <div class="example-row">
       <div style="width: 100%;">
-        <ews-infinite-scroll speed="60" gap="48">
-          <div style="width: 100%;height: 100px;">
-            <p>content</p>
+        <ews-infinite-scroll speed="60" gap="48" direction="left">
+          <div style="display: flex; gap: 32px; font-weight: bold; color: #333;">
+            <span>STATUS: NORMAL</span>
+            <span>SYSTEM: ONLINE</span>
+            <span>TELEMETRY: CONNECTED</span>
           </div>
         </ews-infinite-scroll>
       </div>
     </div>
 
+    <h3>Direction: Right (Reverse Loop - Seamless)</h3>
+    <div class="example-row">
+      <div style="width: 100%;">
+        <ews-infinite-scroll speed="60" gap="48" direction="right">
+          <div style="display: flex; gap: 32px; font-weight: bold; color: #ff5500;">
+            <span>WARNING: HIGH VOLTAGE</span>
+            <span>SECTOR: 04</span>
+            <span>ALERT LEVEL: ELEVATED</span>
+          </div>
+        </ews-infinite-scroll>
+      </div>
+    </div>
+
+    <h3>Emergency Bar Example</h3>
     <div class="example-row">
       <div class="example-item">
         <div class="ews-emergency-container">
@@ -426,6 +471,34 @@
         console.log('Card toggled!');
       });
     });
+
+    // HexGrid Demo Controls
+    const hexGrid = document.getElementById('demo-hex-grid');
+    window.setHexReveal = (variant) => {
+      if (hexGrid) {
+        hexGrid.revealVariant = variant;
+        hexGrid.setAttribute('reveal-variant', variant);
+        if (typeof hexGrid.triggerReveal === 'function') {
+          hexGrid.triggerReveal(variant);
+        }
+      }
+    };
+    window.toggleHexReverse = () => {
+      if (hexGrid) {
+        const next = !hexGrid.reverse;
+        hexGrid.reverse = next;
+        hexGrid.setAttribute('reverse', String(next));
+        if (typeof hexGrid.triggerReveal === 'function') {
+          hexGrid.triggerReveal(undefined, next);
+        }
+      }
+    };
+    window.setHexAlign = (align) => {
+      if (hexGrid) {
+        hexGrid.align = align;
+        hexGrid.setAttribute('align', align);
+      }
+    };
   </script>
 </body>
 

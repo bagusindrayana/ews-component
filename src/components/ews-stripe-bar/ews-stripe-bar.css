@@ -49,7 +49,7 @@
 }
 
 .ews-stripe-bar.red {
-    --ews-stripe-color: var(--red, #f23);
+    --ews-stripe-color: var(--red, #e60908);
     --ews-stripe-size: 15px;
     --ews-glow-color: rgba(255, 17, 0, 0.8);
     --ews-glow-size: 3px;
@@ -66,7 +66,7 @@
     height: 30px;
     display: inline-block;
     flex-shrink: 0;
-    --ews-stripe-color: var(--red, #f23);
+    --ews-stripe-color: var(--red, #e60908);
     --ews-stripe-size: 15px;
     --ews-glow-color: rgba(255, 17, 0, 0.8);
     --ews-glow-size: 3px;
@@ -100,7 +100,7 @@
 .ews-stripe-bar-red-vertical {
     height: max(2000px, 200vh);
     transform: translate3d(0, 0, 0);
-    --ews-stripe-color: var(--red, #f23);
+    --ews-stripe-color: var(--red, #e60908);
     --ews-stripe-size: 15px;
     --ews-glow-color: rgba(255, 17, 0, 0.8);
     --ews-glow-size: 3px;
@@ -126,19 +126,19 @@
 .ews-stripe {
     background-color: black;
     width: 100vw;
-    border-top: 1px solid var(--red, #f23);
-    border-bottom: 1px solid var(--red, #f23);
+    border-top: 1px solid var(--red, #e60908);
+    border-bottom: 1px solid var(--red, #e60908);
     position: fixed;
 }
 
 /* Animations */
 @keyframes loopStripVertical {
     from {
-        background-position: 0px 0px;
+        background-position: 0px -940px;
     }
 
     to {
-        background-position: 0px calc(-42.4264px * 47);
+        background-position: 0px 0px;
     }
 }
 
@@ -148,7 +148,7 @@
     }
 
     to {
-        background-position: 0px calc(-42.4264px * 47);
+        background-position: 0px -940px;
     }
 }
 
@@ -158,17 +158,17 @@
     }
 
     to {
-        background-position: calc(-42.4264px * 47) 0px;
+        background-position: -940px 0px;
     }
 }
 
 @keyframes loopStrip {
     from {
-        background-position: 0px 0px;
+        background-position: -940px 0px;
     }
 
     to {
-        background-position: calc(-42.4264px * 47) 0px;
+        background-position: 0px 0px;
     }
 }
 
@@ -181,7 +181,7 @@
 }
 
 .loop-stripe-vertical-reverse {
-    animation: loopStripVertical 15s infinite linear reverse;
+    animation: loopStripVertical 15s infinite linear;
 }
 
 .stripe-animation {
@@ -189,7 +189,7 @@
 }
 
 .stripe-animation-reverse {
-    animation: stripeAnimation 10s infinite linear reverse;
+    animation: loopStrip 10s infinite linear;
 }
 
 .loop-stripe {
@@ -198,11 +198,11 @@
 }
 
 .loop-stripe.reverse {
-    animation: loopStrip infinite linear reverse;
+    animation: loopStrip infinite linear;
 }
 
 .loop-stripe-reverse {
-    animation: loopStrip infinite linear reverse;
+    animation: loopStrip infinite linear;
     animation-duration: 10s;
 }
 

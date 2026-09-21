@@ -35,15 +35,27 @@ export class EwsStripeBar {
   }
 
   render() {
+    const isVertical = this.orientation === 'vertical';
+
     return (
-      <Host>
-        <div style={{ overflow: 'hidden', height: '100%', width: '100%' }} class={`host-wrapper ${this.customClass}`}>
+      <Host style={isVertical ? { height: '100%' } : {}}>
+        <div
+          style={{
+            overflow: 'hidden',
+            width: '100%',
+            height: isVertical ? '100%' : 'auto'
+          }}
+          class={`host-wrapper ${this.customClass}`}
+        >
           <div
             class={`ews-stripe-wrapper ${this.orientation}`}
-            style={{ [this.orientation === 'vertical' ? 'width' : 'height']: this.size }}
+            style={{
+              [isVertical ? 'width' : 'height']: this.size,
+              ...(isVertical ? { height: '100%' } : {})
+            }}
           >
             <div class={this.getStripeClasses()}></div>
-            <div class={this.getStripeClasses()}></div>
+            {!isVertical && <div class={this.getStripeClasses()}></div>}
           </div>
           <slot></slot>
         </div>
@@ -51,3 +63,4 @@ export class EwsStripeBar {
     );
   }
 }
+

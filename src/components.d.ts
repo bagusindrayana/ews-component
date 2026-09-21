@@ -23,6 +23,11 @@ export namespace Components {
     }
     interface EwsHexGrid {
         /**
+          * Alignment of hex items within the container: 'left', 'center', or 'right'.
+          * @default 'left'
+         */
+        "align": 'left' | 'center' | 'right';
+        /**
           * Additional CSS class for the container.
           * @default ''
          */
@@ -40,6 +45,38 @@ export namespace Components {
           * Width of each hex cell in pixels.
          */
         "hexWidth": number;
+        /**
+          * Alias for triggerReveal to replay current animation.
+         */
+        "replay": () => Promise<void>;
+        /**
+          * Duration for reveal animation in milliseconds.
+          * @default 300
+         */
+        "revealDuration": number;
+        /**
+          * Maximum delay spread for reveal animation across items in milliseconds.
+          * @default 800
+         */
+        "revealMaxDelay": number;
+        /**
+          * Stagger multiplier per distance unit. If specified, overrides revealMaxDelay.
+         */
+        "revealStagger"?: number;
+        /**
+          * Reveal animation variant pattern: 'diagonal', 'diagonal-top-left', 'diagonal-top-right', 'diagonal-bottom-left', 'diagonal-bottom-right', 'left', 'right', 'top', 'bottom', 'center' / 'tengah', 'random' / 'acak', or 'none'.
+          * @default 'none'
+         */
+        "revealVariant": string;
+        /**
+          * If true, runs exit/reverse animation so items collapse in reverse order.
+          * @default false
+         */
+        "reverse": boolean;
+        /**
+          * Programmatically triggers/replays reveal animation with optional variant and reverse direction.
+         */
+        "triggerReveal": (variant?: string, reverse?: boolean) => Promise<void>;
         /**
           * Hex orientation variant: 'pointy' or 'flat'.
           * @default 'pointy'
@@ -254,6 +291,11 @@ declare namespace LocalJSX {
     }
     interface EwsHexGrid {
         /**
+          * Alignment of hex items within the container: 'left', 'center', or 'right'.
+          * @default 'left'
+         */
+        "align"?: 'left' | 'center' | 'right';
+        /**
           * Additional CSS class for the container.
           * @default ''
          */
@@ -271,6 +313,30 @@ declare namespace LocalJSX {
           * Width of each hex cell in pixels.
          */
         "hexWidth"?: number;
+        /**
+          * Duration for reveal animation in milliseconds.
+          * @default 300
+         */
+        "revealDuration"?: number;
+        /**
+          * Maximum delay spread for reveal animation across items in milliseconds.
+          * @default 800
+         */
+        "revealMaxDelay"?: number;
+        /**
+          * Stagger multiplier per distance unit. If specified, overrides revealMaxDelay.
+         */
+        "revealStagger"?: number;
+        /**
+          * Reveal animation variant pattern: 'diagonal', 'diagonal-top-left', 'diagonal-top-right', 'diagonal-bottom-left', 'diagonal-bottom-right', 'left', 'right', 'top', 'bottom', 'center' / 'tengah', 'random' / 'acak', or 'none'.
+          * @default 'none'
+         */
+        "revealVariant"?: string;
+        /**
+          * If true, runs exit/reverse animation so items collapse in reverse order.
+          * @default false
+         */
+        "reverse"?: boolean;
         /**
           * Hex orientation variant: 'pointy' or 'flat'.
           * @default 'pointy'
@@ -403,9 +469,15 @@ declare namespace LocalJSX {
     interface EwsHexGridAttributes {
         "customClass": string;
         "variant": 'pointy' | 'flat';
+        "align": 'left' | 'center' | 'right';
         "hexWidth": number;
         "hexHeight": number;
         "gap": number;
+        "revealVariant": string;
+        "revealDuration": number;
+        "revealMaxDelay": number;
+        "revealStagger": number;
+        "reverse": boolean;
     }
     interface EwsHexShapeAttributes {
         "customClass": string;
