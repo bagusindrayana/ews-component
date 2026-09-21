@@ -70,7 +70,7 @@ import { defineCustomElements } from 'ews-component/loader';
 defineCustomElements();
 
 // Use in your component
-<ews-stripe-bar percent={75} status="active"></ews-stripe-bar>
+<ews-stripe-bar loop={false} status="active"></ews-stripe-bar>
 ```
 
 ## Documentation
