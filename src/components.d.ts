@@ -8,7 +8,7 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface EwsCard {
         /**
-          * Custom color for border and content (red or orange)
+          * Custom color for border and content (preset 'red', 'orange', or HEX / RGB / RGBA)
          */
         "color"?: string;
         /**
@@ -167,6 +167,7 @@ export namespace Components {
     }
     interface EwsStripeBar {
         /**
+          * Preset color ('red', 'orange') or custom HEX / RGB / RGBA code
           * @default ''
          */
         "color": string;
@@ -282,7 +283,7 @@ declare global {
 declare namespace LocalJSX {
     interface EwsCard {
         /**
-          * Custom color for border and content (red or orange)
+          * Custom color for border and content (preset 'red', 'orange', or HEX / RGB / RGBA)
          */
         "color"?: string;
         /**
@@ -437,6 +438,7 @@ declare namespace LocalJSX {
     }
     interface EwsStripeBar {
         /**
+          * Preset color ('red', 'orange') or custom HEX / RGB / RGBA code
           * @default ''
          */
         "color"?: string;

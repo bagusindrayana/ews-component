@@ -225,6 +225,20 @@
         </ews-card>
         <span class="example-label">Custom</span>
       </div>
+      <div class="example-item">
+        <ews-card color="#00e5ff" toggleable="true" style="max-width: 320px;">
+          <div slot="header" style="padding: 6px; font-weight: bold;">Cyan Card (#00e5ff)</div>
+          <div slot="content" style="padding: 10px;">Custom HEX color automatically detected! Click header to toggle.</div>
+        </ews-card>
+        <span class="example-label">Custom HEX (#00e5ff)</span>
+      </div>
+      <div class="example-item">
+        <ews-card color="rgba(168, 85, 247, 0.95)" toggleable="true" style="max-width: 320px;">
+          <div slot="header" style="padding: 6px; font-weight: bold;">Purple Card (RGBA)</div>
+          <div slot="content" style="padding: 10px;">Custom RGBA color automatically detected! Click header to toggle.</div>
+        </ews-card>
+        <span class="example-label">Custom RGBA</span>
+      </div>
     </div>
   </div>
 
@@ -274,10 +288,12 @@
   <div class="example-section">
     <h2>ews-stripe-bar</h2>
     <p>An animated stripe bar component with various customization options.</p>
+
+    <h3>Horizontal Orientation</h3>
     <div class="example-row">
       <div class="example-item">
         <ews-stripe-bar style="width: 200px;"></ews-stripe-bar>
-        <span class="example-label">Default</span>
+        <span class="example-label">Default (Orange)</span>
       </div>
       <div class="example-item">
         <ews-stripe-bar color="red" style="width: 200px;"></ews-stripe-bar>
@@ -286,12 +302,12 @@
 
       <div class="example-item">
         <ews-stripe-bar color="red" loop="true" style="width: 200px;"></ews-stripe-bar>
-        <span class="example-label">Animated</span>
+        <span class="example-label">Animated (Loop)</span>
       </div>
 
       <div class="example-item">
         <ews-stripe-bar loop="true" reverse="true" style="width: 200px;"></ews-stripe-bar>
-        <span class="example-label">Reverse</span>
+        <span class="example-label">Reverse Loop</span>
       </div>
 
       <div class="example-item">
@@ -299,12 +315,22 @@
         <span class="example-label">Fast, thinner red stripes</span>
       </div>
 
+      <div class="example-item">
+        <ews-stripe-bar color="#00e5ff" loop="true" style="width: 200px;"></ews-stripe-bar>
+        <span class="example-label">Custom HEX (#00e5ff)</span>
+      </div>
+
+      <div class="example-item">
+        <ews-stripe-bar color="rgba(168, 85, 247, 0.9)" loop="true" style="width: 200px;"></ews-stripe-bar>
+        <span class="example-label">Custom RGBA (Purple)</span>
+      </div>
     </div>
 
-    <div class="example-row">
+    <h3>Vertical Orientation</h3>
+    <div class="example-row" style="align-items: flex-start; gap: 32px;">
       <div class="example-item">
         <ews-stripe-bar orientation="vertical" style="height: 200px;"></ews-stripe-bar>
-        <span class="example-label">Default</span>
+        <span class="example-label">Default (Orange)</span>
       </div>
       <div class="example-item">
         <ews-stripe-bar color="red" orientation="vertical" style="height: 200px;"></ews-stripe-bar>
@@ -313,14 +339,28 @@
 
       <div class="example-item">
         <ews-stripe-bar color="red" orientation="vertical" loop="true" style="height: 200px;"></ews-stripe-bar>
-        <span class="example-label">Animated</span>
+        <span class="example-label">Animated (Loop)</span>
       </div>
 
       <div class="example-item">
         <ews-stripe-bar loop="true" orientation="vertical" reverse="true" style="height: 200px;"></ews-stripe-bar>
-        <span class="example-label">Reverse</span>
+        <span class="example-label">Reverse Loop</span>
       </div>
 
+      <div class="example-item">
+        <ews-stripe-bar color="red" orientation="vertical" loop="true" duration="5" size="18px" style="height: 200px;"></ews-stripe-bar>
+        <span class="example-label">Fast, thinner red (size="18px")</span>
+      </div>
+
+      <div class="example-item">
+        <ews-stripe-bar color="#00e5ff" orientation="vertical" loop="true" style="height: 200px;"></ews-stripe-bar>
+        <span class="example-label">Custom HEX (#00e5ff)</span>
+      </div>
+
+      <div class="example-item">
+        <ews-stripe-bar color="rgba(168, 85, 247, 0.9)" orientation="vertical" loop="true" style="height: 200px;"></ews-stripe-bar>
+        <span class="example-label">Custom RGBA (Purple)</span>
+      </div>
     </div>
   </div>
   <div class="example-section">

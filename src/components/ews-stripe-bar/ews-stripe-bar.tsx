@@ -1,4 +1,5 @@
 import { Component, Host, h, Prop } from '@stencil/core';
+import { parseColor } from '../../utils/color';
 
 @Component({
   tag: 'ews-stripe-bar',
@@ -12,21 +13,24 @@ export class EwsStripeBar {
   @Prop() customClass: string = '';
 
 
+  /**
+   * Preset color ('red', 'orange') or custom HEX / RGB / RGBA code
+   */
   @Prop() color: string = '';
-  @Prop() orientation: string = '';
+  @Prop({ reflect: true }) orientation: string = '';
   @Prop() loop: boolean = false;
   @Prop() reverse: boolean = false;
   @Prop() duration: number = 10;
   @Prop() size: string = '30px';
 
-  private getStripeClasses() {
+  private getStripeClasses(preset?: string) {
     const loopStr = this.loop ? 'loop-stripe' : '';
     const orientationStr = this.orientation ? `-${this.orientation}` : '';
     const combinedStr = loopStr + orientationStr;
 
     return [
       'ews-stripe-bar',
-      this.color,
+      preset || '',
       this.orientation,
       combinedStr,
       this.reverse ? 'reverse' : '',
@@ -36,13 +40,22 @@ export class EwsStripeBar {
 
   render() {
     const isVertical = this.orientation === 'vertical';
+    const colorInfo = parseColor(this.color);
+
+    const stripeStyle: Record<string, string> = {};
+    if (colorInfo.isCustom && colorInfo.color) {
+      stripeStyle['--ews-stripe-color'] = colorInfo.color;
+      if (colorInfo.glowColor) {
+        stripeStyle['--ews-glow-color'] = colorInfo.glowColor;
+      }
+    }
 
     return (
-      <Host style={isVertical ? { height: '100%' } : {}}>
+      <Host>
         <div
           style={{
             overflow: 'hidden',
-            width: '100%',
+            width: isVertical ? (this.size || '30px') : '100%',
             height: isVertical ? '100%' : 'auto'
           }}
           class={`host-wrapper ${this.customClass}`}
@@ -54,8 +67,8 @@ export class EwsStripeBar {
               ...(isVertical ? { height: '100%' } : {})
             }}
           >
-            <div class={this.getStripeClasses()}></div>
-            {!isVertical && <div class={this.getStripeClasses()}></div>}
+            <div class={this.getStripeClasses(colorInfo.preset)} style={stripeStyle}></div>
+            {!isVertical && <div class={this.getStripeClasses(colorInfo.preset)} style={stripeStyle}></div>}
           </div>
           <slot></slot>
         </div>

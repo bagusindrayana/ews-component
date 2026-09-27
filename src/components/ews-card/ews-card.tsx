@@ -1,4 +1,5 @@
 import { Component, Prop, State, Event, EventEmitter, Element, h } from '@stencil/core';
+import { parseColor } from '../../utils/color';
 
 @Component({
   tag: 'ews-card',
@@ -15,7 +16,7 @@ export class EwsCard {
 
 
   /**
-   * Custom color for border and content (red or orange)
+   * Custom color for border and content (preset 'red', 'orange', or HEX / RGB / RGBA)
    */
   @Prop() color?: string;
 
@@ -74,10 +75,12 @@ export class EwsCard {
   };
 
   render() {
+    const colorInfo = parseColor(this.color);
+
     const classList = [
       'ews-card',
       this.customClass,
-      this.color ? `ews-card-${this.color}` : '',
+      colorInfo.preset ? `ews-card-${colorInfo.preset}` : '',
       this.toggleable ? 'toggleable' : '',
       this.toggleable ? (this.open ? 'open' : 'closed') : '',
       this.hasFooter ? 'has-footer' : 'no-footer',
@@ -85,10 +88,23 @@ export class EwsCard {
       .filter(Boolean)
       .join(' ');
 
+    const styleObj: Record<string, string> = {};
+    if (colorInfo.isCustom && colorInfo.color) {
+      styleObj['--ews-card-color'] = colorInfo.color;
+    }
+    if (this.customStyle) {
+      this.customStyle.split(';').forEach(rule => {
+        const [prop, val] = rule.split(':');
+        if (prop && val) {
+          styleObj[prop.trim()] = val.trim();
+        }
+      });
+    }
+
     return (
       <div
         class={classList}
-        style={this.customStyle ? { style: this.customStyle } : {}}
+        style={styleObj}
       >
         {this.hasHeader && (
           <div
