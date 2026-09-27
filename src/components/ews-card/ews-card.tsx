@@ -25,9 +25,14 @@ export class EwsCard {
   @Prop() customStyle?: string;
 
   /**
+   * Whether the card content can be toggled by clicking the header
+   */
+  @Prop() toggleable: boolean = false;
+
+  /**
    * Tracks whether the card content is toggled open
    */
-  @State() open: boolean = false;
+  @Prop({ mutable: true, reflect: true }) open: boolean = true;
 
   @State() hasHeader: boolean = false;
   @State() hasFooter: boolean = false;
@@ -63,14 +68,26 @@ export class EwsCard {
   }
 
   private handleToggle = () => {
+    if (!this.toggleable) return;
     this.open = !this.open;
     this.toggle.emit();
   };
 
   render() {
+    const classList = [
+      'ews-card',
+      this.customClass,
+      this.color ? `ews-card-${this.color}` : '',
+      this.toggleable ? 'toggleable' : '',
+      this.toggleable ? (this.open ? 'open' : 'closed') : '',
+      this.hasFooter ? 'has-footer' : 'no-footer',
+    ]
+      .filter(Boolean)
+      .join(' ');
+
     return (
       <div
-        class={`ews-card ${this.customClass} ews-card-${this.color} ${this.open ? 'open' : ''}`.trim()}
+        class={classList}
         style={this.customStyle ? { style: this.customStyle } : {}}
       >
         {this.hasHeader && (

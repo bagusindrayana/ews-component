@@ -20,6 +20,16 @@ export namespace Components {
           * Inline style
          */
         "customStyle"?: string;
+        /**
+          * Tracks whether the card content is toggled open
+          * @default true
+         */
+        "open": boolean;
+        /**
+          * Whether the card content can be toggled by clicking the header
+          * @default false
+         */
+        "toggleable": boolean;
     }
     interface EwsHexGrid {
         /**
@@ -288,6 +298,16 @@ declare namespace LocalJSX {
           * Emitted when the card toggles open/close state
          */
         "onToggle"?: (event: EwsCardCustomEvent<void>) => void;
+        /**
+          * Tracks whether the card content is toggled open
+          * @default true
+         */
+        "open"?: boolean;
+        /**
+          * Whether the card content can be toggled by clicking the header
+          * @default false
+         */
+        "toggleable"?: boolean;
     }
     interface EwsHexGrid {
         /**
@@ -465,6 +485,8 @@ declare namespace LocalJSX {
         "customClass": string;
         "color": string;
         "customStyle": string;
+        "toggleable": boolean;
+        "open": boolean;
     }
     interface EwsHexGridAttributes {
         "customClass": string;

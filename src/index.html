@@ -168,18 +168,18 @@
     <p>A collapsible card component with customizable colors and styling.</p>
     <div class="example-row">
       <div class="example-item">
-        <ews-card color="red">
-          <div slot="header">Red Card Header</div>
+        <ews-card color="red" toggleable="true">
+          <div slot="header">Red Card Header (Toggleable)</div>
           <div slot="content">This is the content of a red card. Click the header to toggle.</div>
         </ews-card>
-        <span class="example-label">Red color</span>
+        <span class="example-label">Red color (toggleable="true")</span>
       </div>
       <div class="example-item">
         <ews-card color="orange">
-          <div slot="header">Orange Card Header</div>
-          <div slot="content">This is the content of an orange card.</div>
+          <div slot="header">Orange Card Header (Default: Static)</div>
+          <div slot="content">This is the content of an orange card (toggleable default is false).</div>
         </ews-card>
-        <span class="example-label">Orange color</span>
+        <span class="example-label">Orange color (default)</span>
       </div>
       <div class="example-item">
         <ews-card color="orange" style="max-width: 400px;">

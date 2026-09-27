@@ -23,6 +23,22 @@
     border-bottom: var(--ews-card-border-width) solid var(--ews-card-color);
 }
 
+.ews-card.toggleable .ews-card-header {
+    cursor: pointer;
+    user-select: none;
+}
+
+.ews-card.toggleable.closed .ews-card-content,
+.ews-card.toggleable:not(.open) .ews-card-content {
+    display: none;
+}
+
+.ews-card.toggleable.closed.no-footer .ews-card-header,
+.ews-card.toggleable:not(.open).no-footer .ews-card-header {
+    border-bottom: none;
+    border-radius: calc(var(--ews-card-radius) - var(--ews-card-border-width));
+}
+
 .ews-card-header .ews-card-text {
     position: absolute;
     top: 0;
@@ -128,9 +144,5 @@
 
     .ews-card-float .ews-card-header {
         border-bottom: unset;
-    }
-
-    .ews-card-header {
-        cursor: pointer;
     }
 }
