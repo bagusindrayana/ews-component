@@ -17,6 +17,7 @@ npm install ews-component
 -   `ews-card`: A versatile card component for displaying content.
 -   `ews-hex-grid`: A grid layout with hexagonal cells.
 -   `ews-hex-shape`: Individual hexagonal shape component.
+-   `ews-infinite-scroll`: A continuous, configurable scrolling ticker.
 -   `ews-rib-layout`: A responsive "ribcage" layout for hierarchical data.
 -   `ews-stripe-bar`: A striped status or progress bar.
 
@@ -51,6 +52,111 @@ To start developing components locally, clone this repository and follow these s
 
 Since these are standard Web Components, they work in any framework (React, Vue, Angular, Svelte) or with no framework at all.
 
+### Usage Examples
+
+Load the component bundle once in a plain HTML page, then use the custom elements:
+
+```html
+<script type="module" src="./node_modules/ews-component/dist/ews-component/ews-component.esm.js"></script>
+```
+
+#### `ews-card`
+
+Use named slots for the header, content, and footer. Clicking the header toggles the card and emits a `toggle` event.
+
+```html
+<ews-card color="orange">
+    <div slot="header">Weather alert</div>
+    <div slot="content">Heavy rain expected in the northern district.</div>
+    <div slot="footer">Updated just now</div>
+</ews-card>
+
+<script>
+    document.querySelector('ews-card').addEventListener('toggle', () => {
+        console.log('Card open state changed');
+    });
+</script>
+```
+
+#### `ews-hex-shape`
+
+Set `flat-top="false"` for a pointy-top shape. `clip-content` clips slotted content to the hexagon.
+
+```html
+<ews-hex-shape color="red" flat-top="false" clip-content="true" padding-content="16"
+    style="width: 160px;">
+    <strong>CRITICAL</strong>
+</ews-hex-shape>
+```
+
+Supported built-in colors are `orange` and `red`; other styling can be applied with CSS.
+
+#### `ews-stripe-bar`
+
+Use `orientation="vertical"` for a vertical bar. The supported animation durations are 5, 10, and 20 seconds.
+
+```html
+<ews-stripe-bar color="red" loop="true" reverse="true" duration="5" size="18px"
+    style="width: 320px;"></ews-stripe-bar>
+
+<ews-stripe-bar orientation="vertical" loop="true" style="height: 180px;"></ews-stripe-bar>
+```
+
+#### `ews-hex-grid`
+
+Wrap each cell in `.ews-hex-hive`. The grid can be configured with attributes or controlled through its methods.
+
+```html
+<ews-hex-grid id="status-grid" variant="pointy" align="center" gap="6"
+    reveal-variant="diagonal" reveal-duration="250">
+    <div class="ews-hex-hive"><ews-hex-shape color="orange">01</ews-hex-shape></div>
+    <div class="ews-hex-hive"><ews-hex-shape color="red">02</ews-hex-shape></div>
+</ews-hex-grid>
+
+<script>
+    const grid = document.querySelector('#status-grid');
+    grid.triggerReveal('center');
+    // Other reveal patterns include left, right, top, bottom, random, and none.
+</script>
+```
+
+#### `ews-rib-layout`
+
+Assign `items` and callback properties in JavaScript. These function-valued properties cannot be set as HTML attributes.
+
+```html
+<ews-rib-layout id="network" max-branches="4"></ews-rib-layout>
+
+<script>
+    const layout = document.querySelector('#network');
+    layout.items = [
+        { id: 1, name: 'North station', status: 'normal' },
+        { id: 2, name: 'River station', status: 'danger' }
+    ];
+    layout.getHref = item => `/stations/${item.id}`;
+    layout.nodeRenderer = item => {
+        const node = document.createElement('span');
+        node.textContent = item.name;
+        return node;
+    };
+    layout.connectorRenderer = item => item.status.toUpperCase();
+</script>
+```
+
+#### `ews-infinite-scroll`
+
+The slotted content is repeated to fill the track. `speed` is measured in pixels per second.
+
+```html
+<ews-infinite-scroll speed="45" gap="32" direction="right" pause-on-hover="true">
+    <div style="display: flex; gap: 32px;">
+        <span>SYSTEM ONLINE</span>
+        <span>TELEMETRY CONNECTED</span>
+        <span>ALL STATIONS NORMAL</span>
+    </div>
+</ews-infinite-scroll>
+```
+
 ### Lazy Loading (Universal)
 
 Include the loader script in your HTML:
@@ -70,7 +176,7 @@ import { defineCustomElements } from 'ews-component/loader';
 defineCustomElements();
 
 // Use in your component
-<ews-stripe-bar loop={false} status="active"></ews-stripe-bar>
+<ews-stripe-bar color="red" loop={true} duration={5}></ews-stripe-bar>
 ```
 
 ## Documentation

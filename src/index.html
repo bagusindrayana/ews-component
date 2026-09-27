@@ -252,6 +252,13 @@
       </div>
 
       <div class="example-item">
+        <ews-hex-shape color="red" flat-top="false" padding-content="18" style="width: 150px;">
+          <div style="text-align: center; color: white; font-weight: bold;">RED ALERT</div>
+        </ews-hex-shape>
+        <span class="example-label">Red, pointy top, custom padding</span>
+      </div>
+
+      <div class="example-item">
         <ews-hex-shape clip-content="true" style="width: 150px; height: 150px;">
           <div style="padding: 20px; text-align: center; color: white; background: rgba(0,0,0,0.3);">
             Clipped Content - This text is clipped within the hex boundary
@@ -285,6 +292,11 @@
       <div class="example-item">
         <ews-stripe-bar loop="true" reverse="true" style="width: 200px;"></ews-stripe-bar>
         <span class="example-label">Reverse</span>
+      </div>
+
+      <div class="example-item">
+        <ews-stripe-bar color="red" loop="true" duration="5" size="18px" style="width: 200px;"></ews-stripe-bar>
+        <span class="example-label">Fast, thinner red stripes</span>
       </div>
 
     </div>
@@ -343,6 +355,20 @@
         </ews-hex-grid>
       </div>
     </div>
+
+    <h3>Flat orientation</h3>
+    <div class="example-row">
+      <div class="example-item" style="width: 100%;">
+        <ews-hex-grid variant="flat" align="center" gap="8" hex-width="92" hex-height="80" reveal-variant="diagonal" style="width: 100%; max-width: 480px; min-height: 210px; background: #111; padding: 16px; border-radius: 8px;">
+          <div class="ews-hex-hive"><ews-hex-shape color="red">A1</ews-hex-shape></div>
+          <div class="ews-hex-hive"><ews-hex-shape color="orange">A2</ews-hex-shape></div>
+          <div class="ews-hex-hive"><ews-hex-shape color="red">A3</ews-hex-shape></div>
+          <div class="ews-hex-hive"><ews-hex-shape color="orange">B1</ews-hex-shape></div>
+          <div class="ews-hex-hive"><ews-hex-shape color="red">B2</ews-hex-shape></div>
+          <div class="ews-hex-hive"><ews-hex-shape color="orange">B3</ews-hex-shape></div>
+        </ews-hex-grid>
+      </div>
+    </div>
   </div>
 
 
@@ -380,6 +406,19 @@
             <span>WARNING: HIGH VOLTAGE</span>
             <span>SECTOR: 04</span>
             <span>ALERT LEVEL: ELEVATED</span>
+          </div>
+        </ews-infinite-scroll>
+      </div>
+    </div>
+
+    <h3>Pause on hover</h3>
+    <div class="example-row">
+      <div style="width: 100%;">
+        <ews-infinite-scroll speed="35" gap="24" direction="left" pause-on-hover="true">
+          <div style="display: flex; gap: 24px; font-weight: bold; color: #167a52;">
+            <span>LIVE FEED</span>
+            <span>HOVER TO PAUSE</span>
+            <span>REFRESH: 35 PX/S</span>
           </div>
         </ews-infinite-scroll>
       </div>

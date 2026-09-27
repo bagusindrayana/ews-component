@@ -109,7 +109,7 @@ Jika ingin menggunakan langsung di file HTML tanpa build tool:
     <p>Berjalan langsung di browser.</p>
   </ews-card>
 
-  <ews-hex-shape color="#3498db" size="120"></ews-hex-shape>
+  <ews-hex-shape color="red" flat-top="false" style="width: 120px;"></ews-hex-shape>
 
   <ews-stripe-bar color="red" loop="true" duration="10"></ews-stripe-bar>
 
