@@ -71,6 +71,7 @@ export class EwsHexGrid {
   private mo: MutationObserver;
   private lastVariant?: string;
   private lastReverse?: boolean;
+  private animAlt: boolean = false;
 
   /**
    * Programmatically triggers/replays reveal animation with optional variant and reverse direction.
@@ -135,7 +136,27 @@ export class EwsHexGrid {
           transform: scale(1);
         }
       }
+      @keyframes showPopUpAlt {
+        0% {
+          opacity: 0;
+          transform: scale(0.5);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
       @keyframes closePopUp {
+        0% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        100% {
+          opacity: 0;
+          transform: scale(0.5);
+        }
+      }
+      @keyframes closePopUpAlt {
         0% {
           opacity: 1;
           transform: scale(1);
@@ -147,12 +168,12 @@ export class EwsHexGrid {
       }
       .ews-hex-reveal-in {
         opacity: 0;
-        animation: showPopUp var(--hex-reveal-duration, 0.3s) cubic-bezier(0.34, 1.56, 0.64, 1) both !important;
+        animation: var(--hex-anim-name, showPopUp) var(--hex-reveal-duration, 0.3s) cubic-bezier(0.34, 1.56, 0.64, 1) both !important;
         animation-delay: var(--hex-reveal-delay, 0ms) !important;
       }
       .ews-hex-reveal-out {
         opacity: 1;
-        animation: closePopUp var(--hex-reveal-duration, 0.3s) cubic-bezier(0.25, 1, 0.5, 1) both !important;
+        animation: var(--hex-anim-name, closePopUp) var(--hex-reveal-duration, 0.3s) cubic-bezier(0.25, 1, 0.5, 1) both !important;
         animation-delay: var(--hex-reveal-delay, 0ms) !important;
       }
     `;
@@ -439,6 +460,13 @@ export class EwsHexGrid {
     const dMax = Math.max(...distances);
     const dSpan = dMax - dMin || 1;
 
+    if (forceReplay || isStateChanged) {
+      this.animAlt = !this.animAlt;
+    }
+    const animName = this.reverse
+      ? (this.animAlt ? 'closePopUpAlt' : 'closePopUp')
+      : (this.animAlt ? 'showPopUpAlt' : 'showPopUp');
+
     const maxDelay = this.revealStagger
       ? dSpan * this.revealStagger
       : (this.revealMaxDelay ?? 800);
@@ -463,16 +491,16 @@ export class EwsHexGrid {
 
       child.style.setProperty('--hex-reveal-delay', `${delay}ms`);
       child.style.setProperty('--hex-reveal-duration', `${this.revealDuration ?? 300}ms`);
+      child.style.setProperty('--hex-anim-name', animName);
 
-      child.classList.remove('opacity-0', 'show-pop-up', 'close-pop-up');
+      child.classList.remove('opacity-0', 'show-pop-up', 'close-pop-up', 'ews-hex-reveal-in', 'ews-hex-reveal-out');
       if (child.style.animationDelay) {
         child.style.animationDelay = '';
       }
 
-      child.style.animation = 'none';
-      child.classList.remove('ews-hex-reveal-in', 'ews-hex-reveal-out');
+      child.style.setProperty('animation', 'none', 'important');
       void child.offsetWidth;
-      child.style.animation = '';
+      child.style.removeProperty('animation');
       child.classList.add(targetClass);
     }
   }

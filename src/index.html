@@ -555,10 +555,12 @@
     const hexGrid = document.getElementById('demo-hex-grid');
     window.setHexReveal = (variant) => {
       if (hexGrid) {
+        hexGrid.reverse = false;
+        hexGrid.setAttribute('reverse', 'false');
         hexGrid.revealVariant = variant;
         hexGrid.setAttribute('reveal-variant', variant);
         if (typeof hexGrid.triggerReveal === 'function') {
-          hexGrid.triggerReveal(variant);
+          hexGrid.triggerReveal(variant, false);
         }
       }
     };
